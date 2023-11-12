@@ -12,7 +12,7 @@ def create_character():
     # check if users want to change their mind
     while proceed != 'Y':
         proceed = input("Is this correct? (Y/N) ").upper()
-    player = {"X-coordinate": 0, "Y-coordinate": 0, "Intelligence": 5, "Term": 1, "Stress": 0, "Name": character_name}
+    player = {"X-coordinate": 0, "Y-coordinate": 0, "Knowledge": 5, "Term": 1, "Stress": 0, "Name": character_name}
     return player
 
 
@@ -153,14 +153,23 @@ def event(character, difficulty):
 
 
 def character_advance(character):
+    """
+    Determine if character's knowledge is enough to advance to next term.
+    """
     pass
 
 
 def advance(character):
+    """
+    Make the character to advance to next term.
+    """
     pass
 
 
 def at_interview(character):
+    """
+    Check if character is at term 4 and location (4,4).
+    """
     pass
 
 
@@ -169,6 +178,9 @@ def interview(character):
 
 
 def overwhelmed(character):
+    """
+    Check if character's stress reached 100.
+    """
     pass
 
 
@@ -206,6 +218,7 @@ def game():
         print('-'*80)
         print("Sorry! You have passed out and when you wake up, you no longer want to go to school.")
         print('-'*80)
+
 
 def main():
     """
