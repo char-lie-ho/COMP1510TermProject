@@ -36,11 +36,18 @@ def game_difficulty():
 def make_board():
     rows = 5
     columns = 5
-    list_of_locations = ('school', 'interview', 'library', 'hackathon')  # may add more locations
+    list_of_locations = ('study room', 'library', 'classroom', 'hackathon')  # may add more locations
     board = {}
     for row in range(rows):
         for column in range(columns):
-            board[(row,column)] = random.choice(list_of_locations)
+            if row == 0 and column == 0:
+                board[(row, column)] = 'home'  # make the start location home
+            elif row == 0 or column == 0:
+                board[(row, column)] = 'street'  # make the top and left edge locations to street
+            elif row == 4 and column == 4:
+                board[(row, column)] = 'interview'  # the final 'boss' location
+            else:
+                board[(row, column)] = random.choice(list_of_locations)  # randomly create locations
     return board
 
 
