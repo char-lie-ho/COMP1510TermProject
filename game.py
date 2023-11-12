@@ -101,7 +101,41 @@ def validate_move(board, character, direction):
         return True
 
 
+def move_character(character, direction):
+    """
+    Move the character to a new location.
+
+    :param character: a dictionary describing the character
+    :param direction: a string representing the direction to move
+    :precondition: character must contain "X-coordinate", "Y-coordinate" as keys
+    :precondition: direction must be either "N", "S", "W", or "E"
+    :postcondition: update character's coordinates
+    :return: a dictionary containing character's updated location
+
+    >>> character1 = {'X-coordinate': 1, 'Y-coordinate': 1}
+    >>> direction1 = 'N'
+    >>> move_character(character1, direction1)
+    {'X-coordinate': 1, 'Y-coordinate': 0}
+    >>> character2 = {'X-coordinate': 1, 'Y-coordinate': 1}
+    >>> direction2 = 'W'
+    >>> move_character(character2, direction2)
+    {'X-coordinate': 0, 'Y-coordinate': 1}
+    """
+    if direction == "N":
+        character["Y-coordinate"] -= 1
+    elif direction == "S":
+        character["Y-coordinate"] += 1
+    elif direction == "W":
+        character["X-coordinate"] -= 1
+    else:
+        character["X-coordinate"] += 1
+    return character
+
+
 def game():
+    """
+    Start the game.
+    """
     character = create_character()
     # game_difficulty()
     # make_board()
@@ -112,8 +146,7 @@ def game():
         direction = get_user_choice()
         valid_move = validate_move(board, character, direction)
         if valid_move:
-            pass
-            # move_character(character)
+            move_character(character, direction)
         else:
             print("You hit a wall! ")
 
