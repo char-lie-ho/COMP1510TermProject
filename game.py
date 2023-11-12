@@ -2,6 +2,7 @@
 Charlie Ho
 A01358146
 """
+import random
 
 
 def create_character():
@@ -16,8 +17,6 @@ def create_character():
 
 
 def game_difficulty():
-    # print(int(difficulty) not in [1, 2, 3])
-
     while True:
         difficulty = input("Life is hard, how hard you want this adventure to be on a scale "
                            "from 1 (easiest) to 3 (difficult)? ")
@@ -34,9 +33,22 @@ def game_difficulty():
                 return difficulty
 
 
+def make_board():
+    rows = 5
+    columns = 5
+    list_of_locations = ('school', 'interview', 'library', 'hackathon')  # may add more locations
+    board = {}
+    for row in range(rows):
+        for column in range(columns):
+            board[(row,column)] = random.choice(list_of_locations)
+    return board
+
+
 def game():
-    create_character()
-    game_difficulty()
+    # create_character()
+    # game_difficulty()
+    # make_board()
+    make_board()
 
 
 def main():
