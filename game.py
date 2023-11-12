@@ -36,12 +36,14 @@ def game_difficulty():
 def make_board():
     rows = 5
     columns = 5
-    list_of_locations = ('study room', 'library', 'classroom', 'hackathon')  # may add more locations
+    list_of_locations = ('study room', 'library', 'classroom')  # may add more locations
     board = {}
     for row in range(rows):
         for column in range(columns):
             if row == 0 and column == 0:
                 board[(row, column)] = 'home'  # make the start location home (0, 0)
+            elif row == 2 and column == 2:
+                board[(row, column)] = 'hackathon'  # the hackathon location (2, 2)
             elif row == 4 and column == 4:
                 board[(row, column)] = 'interview'  # the final 'boss' location (4, 4)
             elif row == 0 or column == 0 or row == 4 or column == 4:
@@ -69,7 +71,7 @@ def get_user_choice():
     direction = input('Please enter a direction you want to go (N: North| E: East| S: South| W: West): ').upper()
     while direction not in ['N', 'S', 'E', 'W']:
         direction = input('Not a valid option.\n'
-                          'Please re-enter a direction you want to go (N: North| E: East| S: South| W: West): ')
+                          'Please re-enter a direction you want to go (N: North| E: East| S: South| W: West): ').upper()
     return direction
 
 
