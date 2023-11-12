@@ -59,6 +59,20 @@ def describe_current_location(board, character):
     return current_location
 
 
+def get_user_choice():
+    """
+    Obtain the user's choice of direction (North, East, South, or West).
+
+    :postcondition: ensures that the user's choice is valid (N, E, S, or W)
+    :return: a string with the user's chosen direction
+    """
+    direction = input('Please enter a direction you want to go (N: North| E: East| S: South| W: West): ').upper()
+    while direction not in ['N', 'S', 'E', 'W']:
+        direction = input('Not a valid option.\n'
+                          'Please re-enter a direction you want to go (N: North| E: East| S: South| W: West): ')
+    return direction
+
+
 def game():
     character = create_character()
     # game_difficulty()
@@ -66,7 +80,7 @@ def game():
     board = make_board()
     got_hired = False
     describe_current_location(board, character)
-
+    direction = get_user_choice()
 
 
 
