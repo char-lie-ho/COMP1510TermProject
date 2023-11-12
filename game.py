@@ -148,6 +148,26 @@ def encounter_event():
         return False
 
 
+def event(character, difficulty):
+    pass
+
+
+def character_advance():
+    pass
+
+
+def advance():
+    pass
+
+
+def at_interview(character):
+    pass
+
+
+def interview(character):
+    pass
+
+
 def game():
     """
     Start the game.
@@ -164,7 +184,14 @@ def game():
             move_character(character, direction)
             there_is_an_event = encounter_event()
             if there_is_an_event:
-                pass
+                event(character, difficulty)
+                if character_advance():
+                    advance()
+            if at_interview(character):
+                interview(character)
+            if got_hired:
+                print("Congrats! You have landed your dream job!")
+
         else:
             print("You hit a wall! ")
 
