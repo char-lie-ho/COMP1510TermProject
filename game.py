@@ -152,11 +152,11 @@ def event(character, difficulty):
     pass
 
 
-def character_advance():
+def character_advance(character):
     pass
 
 
-def advance():
+def advance(character):
     pass
 
 
@@ -168,6 +168,10 @@ def interview(character):
     pass
 
 
+def overwhelmed(character):
+    pass
+
+
 def game():
     """
     Start the game.
@@ -176,7 +180,7 @@ def game():
     difficulty = game_difficulty()
     board = make_board()
     got_hired = False
-    while not got_hired:
+    while not overwhelmed(character) and not got_hired:
         describe_current_location(board, character)
         direction = get_user_choice()
         valid_move = validate_move(board, character, direction)
@@ -185,16 +189,23 @@ def game():
             there_is_an_event = encounter_event()
             if there_is_an_event:
                 event(character, difficulty)
-                if character_advance():
-                    advance()
+                if character_advance(character):
+                    advance(character)
             if at_interview(character):
                 interview(character)
-            if got_hired:
-                print("Congrats! You have landed your dream job!")
 
         else:
             print("You hit a wall! ")
+    if got_hired:
+        print('-'*80)
+        print("Congrats! You have landed your dream job!")
+        print("There's nothing more to see. Now go outside!")
+        print('-'*80)
 
+    if overwhelmed(character):
+        print('-'*80)
+        print("Sorry! You have passed out and when you wake up, you no longer want to go to school.")
+        print('-'*80)
 
 def main():
     """
