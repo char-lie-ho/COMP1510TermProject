@@ -12,7 +12,7 @@ def create_character():
     # check if users want to change their mind
     while proceed != 'Y':
         proceed = input("Is this correct? (Y/N) ").upper()
-    player = {"X-coordinate": 0, "Y-coordinate": 0, "Current HP": 5, "Level": 1, "Name": character_name}
+    player = {"X-coordinate": 0, "Y-coordinate": 0, "Intelligence": 5, "Term": 1, "Stress": 0, "Name": character_name}
     return player
 
 
@@ -56,6 +56,8 @@ def game():
     # game_difficulty()
     # make_board()
     make_board()
+    got_hired = False
+
 
 
 def main():
