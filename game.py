@@ -41,13 +41,14 @@ def make_board():
     for row in range(rows):
         for column in range(columns):
             if row == 0 and column == 0:
-                board[(row, column)] = 'home'  # make the start location home
-            elif row == 0 or column == 0:
-                board[(row, column)] = 'street'  # make the top and left edge locations to street
+                board[(row, column)] = 'home'  # make the start location home (0, 0)
             elif row == 4 and column == 4:
-                board[(row, column)] = 'interview'  # the final 'boss' location
+                board[(row, column)] = 'interview'  # the final 'boss' location (4, 4)
+            elif row == 0 or column == 0 or row == 4 or column == 4:
+                board[(row, column)] = 'street'  # make the edge locations to street
             else:
                 board[(row, column)] = random.choice(list_of_locations)  # randomly create locations
+    print(board)
     return board
 
 
