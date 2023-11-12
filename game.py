@@ -132,13 +132,26 @@ def move_character(character, direction):
     return character
 
 
+def encounter_event():
+    """
+    Determine if the player encounters an event.
+
+    :postcondition: return a boolean value indicating whether the character encounters an event
+    :return: a boolean value of character-event encounter
+    """
+    encounter = random.random()
+    if encounter < 0.25:
+        return True
+    else:
+        return False
+
+
 def game():
     """
     Start the game.
     """
     character = create_character()
-    # game_difficulty()
-    # make_board()
+    difficulty = game_difficulty()
     board = make_board()
     got_hired = False
     while not got_hired:
@@ -147,6 +160,9 @@ def game():
         valid_move = validate_move(board, character, direction)
         if valid_move:
             move_character(character, direction)
+            there_is_an_event = encounter_event()
+            if there_is_an_event:
+                pass
         else:
             print("You hit a wall! ")
 
