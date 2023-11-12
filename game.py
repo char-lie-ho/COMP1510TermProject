@@ -48,7 +48,6 @@ def make_board():
                 board[(row, column)] = 'street'  # make the edge locations to street
             else:
                 board[(row, column)] = random.choice(list_of_locations)  # randomly create locations
-    print(board)
     return board
 
 
@@ -108,14 +107,15 @@ def game():
     # make_board()
     board = make_board()
     got_hired = False
-    describe_current_location(board, character)
-    direction = get_user_choice()
-    valid_move = validate_move(board, character, direction)
-    if valid_move:
-        pass
-        # move_character(character)
-    else:
-        print("You hit a wall! ")
+    while not got_hired:
+        describe_current_location(board, character)
+        direction = get_user_choice()
+        valid_move = validate_move(board, character, direction)
+        if valid_move:
+            pass
+            # move_character(character)
+        else:
+            print("You hit a wall! ")
 
 
 def main():
