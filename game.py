@@ -51,12 +51,22 @@ def make_board():
     return board
 
 
+def describe_current_location(board, character):
+    x_coordinate = character.get("X-coordinate")
+    y_coordinate = character.get("Y-coordinate")
+    current_location = board[(x_coordinate, y_coordinate)]
+    print(f"You are now at %s on location (%d, %d)" % (current_location, x_coordinate, y_coordinate))
+    return current_location
+
+
 def game():
-    # create_character()
+    character = create_character()
     # game_difficulty()
     # make_board()
-    make_board()
+    board = make_board()
     got_hired = False
+    describe_current_location(board, character)
+
 
 
 
