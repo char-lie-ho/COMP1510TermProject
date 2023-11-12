@@ -73,6 +73,34 @@ def get_user_choice():
     return direction
 
 
+def validate_move(board, character, direction):
+    """
+    Receive the move direction and determine if the move is valid.
+
+    :param board: a dictionary describing the board
+    :param character: a dictionary describing the character
+    :param direction: a string describing the desired direction
+    :precondition: board must contain the location coordinates as key and each value is a string description
+    :precondition: character must contain "X-coordinate", "Y-coordinate" and "Current HP" as keys
+    :postcondition: validate moves based on character coordinates, width, and height of the board
+    :return: boolean value
+    """
+    current_character_x_coordinate = character.get("X-coordinate")
+    current_character_y_coordinate = character.get("Y-coordinate")
+    max_x_location = max(coord[0] for coord in board.keys())
+    max_y_location = max(coord[1] for coord in board.keys())
+    if current_character_y_coordinate == 0 and direction == "N":
+        return False
+    elif current_character_x_coordinate == 0 and direction == "W":
+        return False
+    elif current_character_x_coordinate == max_x_location and direction == "E":
+        return False
+    elif current_character_y_coordinate == max_y_location and direction == "S":
+        return False
+    else:
+        return True
+
+
 def game():
     character = create_character()
     # game_difficulty()
@@ -81,7 +109,12 @@ def game():
     got_hired = False
     describe_current_location(board, character)
     direction = get_user_choice()
-
+    valid_move = validate_move(board, character, direction)
+    if valid_move:
+        pass
+        # move_character(character)
+    else:
+        print("You hit a wall! ")
 
 
 def main():
