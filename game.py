@@ -198,14 +198,14 @@ def game():
         valid_move = validate_move(board, character, direction)
         if valid_move:
             move_character(character, direction)
-            there_is_an_event = encounter_event()
-            if there_is_an_event:
-                event(character, difficulty)
-                if character_advance(character):
-                    advance(character)
             if at_interview(character):
                 interview(character)
-
+            else:
+                there_is_an_event = encounter_event()
+                if there_is_an_event:
+                    event(character, difficulty)
+                    if character_advance(character):
+                        advance(character)
         else:
             print("You hit a wall! ")
     if got_hired:
