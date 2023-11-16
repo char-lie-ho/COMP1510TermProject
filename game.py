@@ -154,7 +154,7 @@ def event(character, difficulty):
     while progress < 100:
         attempt = input()
         # the player will make progress when the enter something
-        if attempt is not "":
+        if attempt != "":
             progress += random.randint(5, 50)
             if progress <= 100:
                 print('You have finished %d%%' % progress)
@@ -162,7 +162,7 @@ def event(character, difficulty):
                 print('You have finished 100% ! Great Job.')
                 character["Knowledge"] += (4 - difficulty) * 1  # higher difficulty will have less gained knowledge
                 character["Stress"] += 5 * difficulty  # higher difficulty will result in higher stress
-                print('You have learned from this. You knowledge is now %d.' % character["Knowledge"])
+                print('You have learned from this. [Knowledge = %d]' % character["Knowledge"])
                 print('However, you are more stressed now. [Stress = %d]' % character["Stress"])
         else:
             print('Hint: You can type anything to try to solve.')
@@ -221,8 +221,9 @@ def interview(character):
     if character_knowledge <= 15:
         character["Stress"] += 10
         print('Sorry, your skills and experience do not meet our current needs.')
-        print('[Stress +10], your current stress is %d' % character_stress)
-        print('However, you also learn from this [Knowledge +1], you knowledge is %d' % character_knowledge)
+        print('Please try to study more and come back.')
+        print('You are exhausted from this interview. [Stress = %d]' % character_stress)
+        print('However, you also learn from this. [Knowledge = %d]' % character_knowledge)
         return character
     else:
         actual_number = random.randint(1, 5)
@@ -233,12 +234,12 @@ def interview(character):
             character["Stress"] += 5
             print("Oh, you can't even type numbers?!")
             print('Sorry, your skills and experience do not meet our current needs.')
-            print('[Stress +5], your current stress is %d' % character_stress)
+            print('Your current stress is [Stress = %d]' % character_stress)
         else:
             if actual_number != guess_number:
                 character["Stress"] += 5
                 print('Sorry, your skills and experience do not meet our current needs.')
-                print('[Stress +5], your current stress is %d' % character_stress)
+                print('[Stress +5], your current stress is [Stress = %d]' % character_stress)
             else:
                 character["Hired"] = True
             return character
@@ -246,9 +247,9 @@ def interview(character):
 
 def overwhelmed(character):
     """
-    Check if character's stress reached 100.
+    Check if character's stress reached 50.
     """
-    if character["Stress"] >= 100:
+    if character["Stress"] >= 50:
         return True
     else:
         return False
@@ -285,7 +286,7 @@ def game():
                         advance(character)
             got_hired = check_if_hired(character)
         else:
-            print("You hit a wall! ")
+            print("Ouch! You hit a wall! ")
     if got_hired:
         print('-'*80)
         print("We need you!")
