@@ -20,7 +20,7 @@ def create_character():
 def game_difficulty():
     while True:
         difficulty = input("Life is hard, how hard you want this adventure to be on a scale "
-                           "from 1 (difficult) to 3 (easiest)? ")
+                           "from 1 (easy) to 3 (difficult)? ")
         try:
             float(difficulty)
         except ValueError:
@@ -31,7 +31,7 @@ def game_difficulty():
                 continue
             else:
                 print("Great! I like your choice.")
-                return difficulty
+                return int(difficulty)
 
 
 def make_board():
@@ -141,14 +141,30 @@ def encounter_event():
     :return: a boolean value of character-event encounter
     """
     encounter = random.random()
-    if encounter < 0.25:
+    if encounter < 1:
         return True
     else:
         return False
 
 
 def event(character, difficulty):
-    pass
+    progress = 0
+    print('You are trying solve a Leetcode Question. (Hint: You can type anything to try to solve.)')
+    print('You have finished %d%%' % progress)
+    while progress < 100:
+        attempt = input()
+        if attempt is not "":
+            progress += random.randint(5, 50)
+            if progress <= 100:
+                print('You have finished %d%%' % progress)
+            else:
+                print('You have finished 100% ! Great Job.')
+                character["Knowledge"] += (4 - difficulty) * 1  # higher difficult will have less gained knowledge
+                character["Stress"] += 5
+                print('You have learned from this. You knowledge is now %d.' % character["Knowledge"])
+                print('However, you are more stressed now. [Stress = %d]' % character["Stress"])
+        else:
+            print('Hint: You can type anything to try to solve.')
 
 
 def character_advance(character):
@@ -157,7 +173,7 @@ def character_advance(character):
 
     :return: a boolean value of whether character advances
     """
-    character_term = character["term"]
+    character_term = character["Term"]
     character_knowledge = character["Knowledge"]
     decision_of_advance = False
     # Only 4 terms in this game
@@ -171,7 +187,9 @@ def advance(character):
     """
     Make the character to advance to next term.
     """
-    character["term"] += 1
+    character["Term"] += 1
+    print('Excellent!')
+    print('You are now in Term %d' % character["Term"])
 
 
 def at_interview(character):
