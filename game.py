@@ -6,6 +6,12 @@ import random
 
 
 def create_character():
+    """
+    Ask player for the character's name and declare the initial state of the character.
+
+    postcondition: initialize character coordinates, knowledge, term, stress, and name
+    :return: a dictionary contain character info
+    """
     character_name = input("Tell me, what is your name? ")
     print("So, your name is %s" % character_name)
     proceed = input("Is this correct? (Y/N) ").upper()
