@@ -72,10 +72,26 @@ def make_board(rows, columns):
 
 
 def describe_current_location(board, character):
+    """
+    Return the current location on the board.
+
+    :param board: a dictionary contains the coordinates as key and description of that location as value
+    :param character: a dictionary contains character coordinates and HP
+    :precondition: board must contain the location coordinates as key and each value is a string description
+    :precondition: character must contain "X-coordinate", "Y-coordinate" and "Current HP" as keys
+    :postcondition: retrieve location information on board base on the character coordinate
+    :return: a string describing the location of the board
+
+    >>> board1 = {(0, 0): 'library', (0, 1): 'classroom'}
+    >>> character1 = {"X-coordinate": 0, "Y-coordinate": 0}
+    >>> describe_current_location(board1, character1)
+    You are now at [library] on location (0, 0)
+    'library'
+    """
     x_coordinate = character.get("X-coordinate")
     y_coordinate = character.get("Y-coordinate")
     current_location = board[(x_coordinate, y_coordinate)]
-    print(f"You are now at %s on location (%d, %d)" % (current_location, x_coordinate, y_coordinate))
+    print(f"You are now at [%s] on location (%d, %d)" % (current_location, x_coordinate, y_coordinate))
     return current_location
 
 
