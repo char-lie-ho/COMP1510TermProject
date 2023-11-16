@@ -341,6 +341,12 @@ def main():
     print("I am pleased to inform you that you have been accepted to Level 1 of the CST program. ")
     print("Congratulations and best wishes in your future studies.")
     print('-' * 80)
+    print('\t \t \t \t Tips for playing')
+    print('1. You are a student, which means you have to gain knowledge to advance to other terms.')
+    print('2. Keep your stress level below 50, or you will pass out.')
+    print('3. You goal is to get hired at Term 4, you can go to location (4,4) for job interview.')
+    print('4. If your knowledge is <= 15, you will not be hired.')
+    print('-' * 80)
     game()
 
 
