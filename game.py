@@ -12,8 +12,8 @@ def create_character():
     # check if users want to change their mind
     while proceed != 'Y':
         proceed = input("Is this correct? (Y/N) ").upper()
-    player = {"X-coordinate": 0, "Y-coordinate": 0, "Knowledge": 5, "Term": 1, "Stress": 0, "Name": character_name}
-    return player
+    character = {"X-coordinate": 0, "Y-coordinate": 0, "Knowledge": 0, "Term": 1, "Stress": 0, "Name": character_name}
+    return character
 
 
 def game_difficulty():
@@ -211,7 +211,6 @@ def game():
     if got_hired:
         print('-'*80)
         print("Congrats! You have landed your dream job!")
-        print("There's nothing more to see. Now go outside!")
         print('-'*80)
 
     if overwhelmed(character):
