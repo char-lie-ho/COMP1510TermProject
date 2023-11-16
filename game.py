@@ -183,6 +183,9 @@ def encounter_event():
 
 
 def event(character, difficulty):
+    """
+    Simulate a typing game where the player attempts to solve a Leetcode question.
+    """
     progress = 0
     print('You are trying solve a Leetcode Question. (Hint: You can type anything to try to solve.)')
     print('You have finished %d%%' % progress)
@@ -232,7 +235,18 @@ def advance(character):
 
 def at_interview(character):
     """
-    Check if character is at term 4 and location (4,4).
+    Determine if character is at term 4 and at the interview location (4,4).
+
+    :param character: a dictionary describing the character
+    :precondition: character must contain "X-coordinate" and "Y-coordinate" as keys
+    :postcondition: determine if the user is at interview location base on the coordinates
+    :return: a boolean value of whether the character is at interview location
+    >>> character1 = {"X-coordinate": 0, "Y-coordinate": 0}
+    >>> at_interview(character1)
+    False
+    >>> character2 = {"X-coordinate": 4, "Y-coordinate": 4}
+    >>> at_interview(character2)
+    True
     """
     x_coordinate = character.get("X-coordinate")
     y_coordinate = character.get("Y-coordinate")
@@ -287,13 +301,15 @@ def overwhelmed(character):
         return False
 
 
-def check_if_hired(character):
+def check_if_hired(character):  # should i keep this?
     """
        Check if the character has been hired.
 
        :param character: a dictionary representing the character, including "Hired" as key
        :postcondition: retrieve boolean value inside dictionary with the key "Hired"
        :return: the boolean vlue
+        >>> check_if_hired({"Hired": False})
+        False
        """
     if character["Hired"]:
         return True
