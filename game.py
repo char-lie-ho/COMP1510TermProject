@@ -141,7 +141,7 @@ def encounter_event():
     :return: a boolean value of character-event encounter
     """
     encounter = random.random()
-    if encounter < 1:
+    if encounter < 0.25:  # the chance of an event happens is 25%
         return True
     else:
         return False
@@ -217,6 +217,7 @@ def interview(character):
 
     character_knowledge = character["Knowledge"]
     character_stress = character["Stress"]
+    print('You have arrive the interview room.')
     if character_knowledge <= 15:
         character["Stress"] += 10
         print('Sorry, your skills and experience do not meet our current needs.')
@@ -224,7 +225,7 @@ def interview(character):
         print('However, you also learn from this [Knowledge +1], you knowledge is %d' % character_knowledge)
         return character
     else:
-        actual_number = 1
+        actual_number = random.randint(1, 5)
         guess_number = input('People say interviewing is a numbers game, let\'s pick a number between 1 and 5. ')
         try:
             guess_number = int(guess_number)
@@ -239,7 +240,6 @@ def interview(character):
                 print('Sorry, your skills and experience do not meet our current needs.')
                 print('[Stress +5], your current stress is %d' % character_stress)
             else:
-                print("We need you!")
                 character["Hired"] = True
             return character
 
@@ -288,6 +288,7 @@ def game():
             print("You hit a wall! ")
     if got_hired:
         print('-'*80)
+        print("We need you!")
         print("Congrats! You have landed your dream job!")
         print('-'*80)
 
