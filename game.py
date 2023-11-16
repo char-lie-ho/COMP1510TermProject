@@ -179,7 +179,13 @@ def at_interview(character):
     """
     Check if character is at term 4 and location (4,4).
     """
-    pass
+    x_coordinate = character.get("X-coordinate")
+    y_coordinate = character.get("Y-coordinate")
+
+    if x_coordinate == 4 and y_coordinate == 4:
+        return True
+    else:
+        return False
 
 
 def interview(character):
