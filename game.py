@@ -12,7 +12,7 @@ def create_character():
     # confirm if user has typed the correct name
     while proceed != 'Y':
         proceed = input("Is this correct? (Y/N) ").upper()
-    character = {"X-coordinate": 4, "Y-coordinate": 4, "Knowledge": 0, "Term": 1, "Stress": 0, "Name": character_name,
+    character = {"X-coordinate": 0, "Y-coordinate": 0, "Knowledge": 0, "Term": 1, "Stress": 0, "Name": character_name,
                  "Hired": False}
     return character
 
