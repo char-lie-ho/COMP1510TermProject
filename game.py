@@ -16,7 +16,7 @@ def create_character():
     print("So, your name is %s" % character_name)
     proceed = input("Is this correct? (Y/N) ").upper()
     # confirm if user has typed the correct name
-    while proceed != 'Y':
+    while proceed not in ['Y', 'YES']:
         proceed = input("Is this correct? (Y/N) ").upper()
     character = {"X-coordinate": 0, "Y-coordinate": 0, "Knowledge": 0, "Term": 1, "Stress": 0, "Name": character_name,
                  "Hired": False}
