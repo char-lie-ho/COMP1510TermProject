@@ -12,14 +12,15 @@ def create_character():
     # check if users want to change their mind
     while proceed != 'Y':
         proceed = input("Is this correct? (Y/N) ").upper()
-    character = {"X-coordinate": 0, "Y-coordinate": 0, "Knowledge": 0, "Term": 1, "Stress": 0, "Name": character_name}
+    character = {"X-coordinate": 0, "Y-coordinate": 0, "Knowledge": 20, "Term": 1, "Stress": 0, "Name": character_name,
+                 "Hired": False}
     return character
 
 
 def game_difficulty():
     while True:
         difficulty = input("Life is hard, how hard you want this adventure to be on a scale "
-                           "from 1 (easiest) to 3 (difficult)? ")
+                           "from 1 (difficult) to 3 (easiest)? ")
         try:
             float(difficulty)
         except ValueError:
@@ -42,8 +43,6 @@ def make_board():
         for column in range(columns):
             if row == 0 and column == 0:
                 board[(row, column)] = 'home'  # make the start location home (0, 0)
-            elif row == 2 and column == 2:
-                board[(row, column)] = 'hackathon'  # the hackathon location (2, 2)
             elif row == 4 and column == 4:
                 board[(row, column)] = 'interview'  # the final 'boss' location (4, 4)
             elif row == 0 or column == 0 or row == 4 or column == 4:
@@ -189,13 +188,49 @@ def at_interview(character):
 
 
 def interview(character):
-    pass
+    """
+    Determine if character has enough knowledge to get hired.
+    """
+    # if character's knowledge is less than 10, 0 chance
+    # after 10, each point of knowledge increase 10% chances
+
+    character_knowledge = character["Knowledge"]
+    character_stress = character["Stress"]
+    if character_knowledge <= 15:
+        character["Stress"] += 10
+        print('Sorry, your skills and experience do not meet our current needs.')
+        print('[Stress +10], your current stress is %d' % character_stress)
+        print('However, you also learn from this [Knowledge +1], you knowledge is %d' % character_knowledge)
+        return character
+    else:
+        actual_number = 1
+        guess_number = input('People say interviewing is a numbers game, let\'s pick a number between 1 and 5. ')
+        try:
+            guess_number = int(guess_number)
+        except ValueError:
+            character["Stress"] += 5
+            print("Oh, you can't even type numbers?!")
+            print('Sorry, your skills and experience do not meet our current needs.')
+            print('[Stress +5], your current stress is %d' % character_stress)
+        else:
+            if actual_number != guess_number:
+                character["Stress"] += 5
+                print('Sorry, your skills and experience do not meet our current needs.')
+                print('[Stress +5], your current stress is %d' % character_stress)
+            else:
+                print("We need you!")
+                character["Hired"] = True
+            return character
 
 
 def overwhelmed(character):
     """
     Check if character's stress reached 100.
     """
+    pass
+
+
+def check_if_hired(character):
     pass
 
 
@@ -221,6 +256,7 @@ def game():
                     event(character, difficulty)
                     if character_advance(character):
                         advance(character)
+            got_hired = check_if_hired(character)
         else:
             print("You hit a wall! ")
     if got_hired:
