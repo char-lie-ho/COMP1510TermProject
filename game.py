@@ -160,8 +160,11 @@ def character_advance(character):
     """
     character_term = character["term"]
     character_knowledge = character["Knowledge"]
-    # Each term requires 5 knowledge points
-    decision_of_advance = character_knowledge / character_term >= 5
+    decision_of_advance = False
+    # Only 4 terms in this game
+    if character_term < 4:
+        # Each term requires 5 knowledge points
+        decision_of_advance = character_knowledge / 5 >= character_term
     return decision_of_advance
 
 
@@ -169,7 +172,7 @@ def advance(character):
     """
     Make the character to advance to next term.
     """
-    pass
+    character["term"] += 1
 
 
 def at_interview(character):
