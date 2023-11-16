@@ -12,7 +12,7 @@ def create_character():
     # confirm if user has typed the correct name
     while proceed != 'Y':
         proceed = input("Is this correct? (Y/N) ").upper()
-    character = {"X-coordinate": 0, "Y-coordinate": 0, "Knowledge": 0, "Term": 1, "Stress": 0, "Name": character_name,
+    character = {"X-coordinate": 4, "Y-coordinate": 4, "Knowledge": 0, "Term": 1, "Stress": 0, "Name": character_name,
                  "Hired": False}
     return character
 
@@ -212,18 +212,15 @@ def interview(character):
     """
     Determine if character has enough knowledge to get hired.
     """
-    # if character's knowledge is less than 10, 0 chance
-    # after 10, each point of knowledge increase 10% chances
-
-    character_knowledge = character["Knowledge"]
-    character_stress = character["Stress"]
+    # the character has to have 15 knowledge to have a chance to be hired
     print('You have arrive the interview room.')
-    if character_knowledge <= 15:
+    if character["Knowledge"] <= 15:
         character["Stress"] += 10
+        character["Knowledge"] += 1
         print('Sorry, your skills and experience do not meet our current needs.')
         print('Please try to study more and come back.')
-        print('You are exhausted from this interview. [Stress = %d]' % character_stress)
-        print('However, you also learn from this. [Knowledge = %d]' % character_knowledge)
+        print('You are exhausted from this interview. [Stress = %d]' % character["Stress"])
+        print('However, you also learn from this. [Knowledge = %d]' % character["Knowledge"])
         return character
     else:
         actual_number = random.randint(1, 5)
@@ -234,12 +231,12 @@ def interview(character):
             character["Stress"] += 5
             print("Oh, you can't even type numbers?!")
             print('Sorry, your skills and experience do not meet our current needs.')
-            print('Your current stress is [Stress = %d]' % character_stress)
+            print('Your current stress is [Stress = %d]' % character["Stress"])
         else:
             if actual_number != guess_number:
                 character["Stress"] += 5
                 print('Sorry, your skills and experience do not meet our current needs.')
-                print('[Stress +5], your current stress is [Stress = %d]' % character_stress)
+                print('[Stress +5], your current stress is [Stress = %d]' % character["Stress"])
             else:
                 character["Hired"] = True
             return character
