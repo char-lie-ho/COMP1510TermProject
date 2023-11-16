@@ -155,8 +155,14 @@ def event(character, difficulty):
 def character_advance(character):
     """
     Determine if character's knowledge is enough to advance to next term.
+
+    :return: a boolean value of whether character advances
     """
-    pass
+    character_term = character["term"]
+    character_knowledge = character["Knowledge"]
+    # Each term requires 5 knowledge points
+    decision_of_advance = character_knowledge / character_term >= 5
+    return decision_of_advance
 
 
 def advance(character):
