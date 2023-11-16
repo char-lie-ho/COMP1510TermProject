@@ -9,7 +9,7 @@ def create_character():
     character_name = input("Tell me, what is your name? ")
     print("So, your name is %s" % character_name)
     proceed = input("Is this correct? (Y/N) ").upper()
-    # check if users want to change their mind
+    # confirm if user has typed the correct name
     while proceed != 'Y':
         proceed = input("Is this correct? (Y/N) ").upper()
     character = {"X-coordinate": 0, "Y-coordinate": 0, "Knowledge": 0, "Term": 1, "Stress": 0, "Name": character_name,
@@ -153,14 +153,15 @@ def event(character, difficulty):
     print('You have finished %d%%' % progress)
     while progress < 100:
         attempt = input()
+        # the player will make progress when the enter something
         if attempt is not "":
             progress += random.randint(5, 50)
             if progress <= 100:
                 print('You have finished %d%%' % progress)
             else:
                 print('You have finished 100% ! Great Job.')
-                character["Knowledge"] += (4 - difficulty) * 1  # higher difficult will have less gained knowledge
-                character["Stress"] += 5
+                character["Knowledge"] += (4 - difficulty) * 1  # higher difficulty will have less gained knowledge
+                character["Stress"] += 5 * difficulty  # higher difficulty will result in higher stress
                 print('You have learned from this. You knowledge is now %d.' % character["Knowledge"])
                 print('However, you are more stressed now. [Stress = %d]' % character["Stress"])
         else:
@@ -190,6 +191,8 @@ def advance(character):
     character["Term"] += 1
     print('Excellent!')
     print('You are now in Term %d' % character["Term"])
+    character["Stress"] -= 5
+    print('After the term break, you are more refreshed! [Stress: %d]' % character["Stress"])
 
 
 def at_interview(character):
@@ -299,7 +302,8 @@ def main():
     Execute the game function.
     """
     print('-' * 80)
-    print("\t \t Welcome!")
+    print("I am pleased to inform you that you have been accepted to Level 1 of the CST program. ")
+    print("Congratulations and best wishes in your future studies.")
     print('-' * 80)
     game()
 
