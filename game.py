@@ -7,7 +7,7 @@ import random
 
 def create_character():
     """
-    Ask player for the character's name and declare the initial state of the character.
+    Ask the player for the character's name and declare the initial state of the character.
 
     postcondition: initialize character coordinates, knowledge, term, stress, and name
     :return: a dictionary contain character info
@@ -24,6 +24,12 @@ def create_character():
 
 
 def game_difficulty():
+    """
+    Ask the player for the game difficulty.
+
+    postcondition: initialize character coordinates, knowledge, term, stress, and name
+    :return: representing the chosen difficulty level (1 for easy, 2 for medium, 3 for difficult)
+    """
     while True:
         difficulty = input("Life is hard, how hard you want this adventure to be on a scale "
                            "from 1 (easy) to 3 (difficult)? ")
