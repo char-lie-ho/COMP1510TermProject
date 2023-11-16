@@ -231,7 +231,10 @@ def overwhelmed(character):
 
 
 def check_if_hired(character):
-    pass
+    if character["Hired"]:
+        return True
+    else:
+        return False
 
 
 def game():
