@@ -259,7 +259,12 @@ def at_interview(character):
 
 def interview(character):
     """
-    Determine if character has enough knowledge to get hired.
+    Simulate a job interview process and assess the character's suitability for the position.
+
+    :param character: a dictionary describing the character
+    :precondition: character must contain "Knowledge" and "Stress"as keys
+    :postcondition: modify the character's info based on the game's outcome
+    :return: a boolean value of whether the character is at interview location
     """
     # the character has to have 15 knowledge to have a chance to be hired
     print('You have arrive the interview room.')
@@ -288,7 +293,7 @@ def interview(character):
                 print('[Stress +5], your current stress is [Stress = %d]' % character["Stress"])
             else:
                 character["Hired"] = True
-            return character
+        return character
 
 
 def overwhelmed(character):
