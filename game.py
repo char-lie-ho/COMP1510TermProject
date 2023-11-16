@@ -288,6 +288,13 @@ def overwhelmed(character):
 
 
 def check_if_hired(character):
+    """
+       Check if the character has been hired.
+
+       :param character: a dictionary representing the character, including "Hired" as key
+       :postcondition: retrieve boolean value inside dictionary with the key "Hired"
+       :return: the boolean vlue
+       """
     if character["Hired"]:
         return True
     else:
