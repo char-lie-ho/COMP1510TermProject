@@ -12,7 +12,7 @@ def create_character():
     # check if users want to change their mind
     while proceed != 'Y':
         proceed = input("Is this correct? (Y/N) ").upper()
-    character = {"X-coordinate": 0, "Y-coordinate": 0, "Knowledge": 20, "Term": 1, "Stress": 0, "Name": character_name,
+    character = {"X-coordinate": 0, "Y-coordinate": 0, "Knowledge": 0, "Term": 1, "Stress": 0, "Name": character_name,
                  "Hired": False}
     return character
 
@@ -227,7 +227,10 @@ def overwhelmed(character):
     """
     Check if character's stress reached 100.
     """
-    pass
+    if character["Stress"] >= 100:
+        return True
+    else:
+        return False
 
 
 def check_if_hired(character):
