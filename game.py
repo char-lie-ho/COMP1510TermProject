@@ -46,10 +46,17 @@ def game_difficulty():
                 return int(difficulty)
 
 
-def make_board():
-    rows = 5
-    columns = 5
-    list_of_locations = ('study room', 'library', 'classroom')  # may add more locations
+def make_board(rows, columns):
+    """
+    Generate a game board with the desired size.
+
+    :param rows: an integer describing the width of the game board
+    :param columns: an integer describing the height of the game board
+    :precondition: both rows and columns are integers greater than or equal to 2
+    :postcondition: create a dictionary containing the coordinates as key and locations as value
+    :return: a dictionary representing the game board
+    """
+    list_of_locations = ('study room', 'library', 'classroom')
     board = {}
     for row in range(rows):
         for column in range(columns):
@@ -275,9 +282,11 @@ def game():
     """
     Start the game.
     """
+    rows = 5
+    columns = 5
     character = create_character()
     difficulty = game_difficulty()
-    board = make_board()
+    board = make_board(rows, columns)
     got_hired = False
     while not overwhelmed(character) and not got_hired:
         describe_current_location(board, character)
