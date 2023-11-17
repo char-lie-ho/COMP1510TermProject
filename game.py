@@ -56,7 +56,7 @@ def make_board(rows, columns):
     :postcondition: create a dictionary containing the coordinates as key and locations as value
     :return: a dictionary representing the game board
     """
-    list_of_locations = ('study room', 'library', 'classroom')
+    list_of_locations = ('study room', 'library', 'classroom', 'hackathon', 'street')
     board = {}
     for row in range(rows):
         for column in range(columns):
@@ -64,8 +64,6 @@ def make_board(rows, columns):
                 board[(row, column)] = 'home'  # make the start location home (0, 0)
             elif row == 4 and column == 4:
                 board[(row, column)] = 'interview'  # the final 'boss' location (4, 4)
-            elif row == 0 or column == 0 or row == 4 or column == 4:
-                board[(row, column)] = 'street'  # make the edge locations to street
             else:
                 board[(row, column)] = random.choice(list_of_locations)  # randomly create locations
     return board
