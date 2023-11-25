@@ -115,15 +115,15 @@ def get_user_choice(character):
     :postcondition: ensures that the user's choice is valid (N, E, S, or W)
     :return: a string with the user's chosen direction
     """
-    decision = input('Please enter a direction you want to go (N: North| E: East| S: South| W: West): ').upper()
+    decision = None
     while decision not in ['N', 'S', 'E', 'W']:
+        decision = input('Please enter a direction you want to go (N: North| E: East| S: South| W: West)'
+                         '\n or (QUIT: save and end game): ').upper()
         if decision == 'QUIT':
             with open('game_save.json', 'w') as output:
                 json.dump(character, output)
             print("Progress has been saved. Good bye!")
             quit()
-        decision = input('Not a valid option.\nPlease re-enter a direction you want to go '
-                         '(N: North| E: East| S: South| W: West): ').upper()
     return decision
 
 
@@ -353,15 +353,15 @@ def game():
         else:
             print("Ouch! You hit a wall! 🧱")
     if character["Hired"]:  # good end
-        print('-'*80)
+        print('-' * 80)
         print("We need you!")
         print("Congrats! You have landed your dream job!")
-        print('-'*80)
+        print('-' * 80)
 
     if character["Stress"] >= 50:  # bad end
-        print('-'*80)
+        print('-' * 80)
         print("Sorry! You have passed out and when you wake up, you no longer want to go to school.")
-        print('-'*80)
+        print('-' * 80)
 
 
 def main():
