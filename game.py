@@ -334,13 +334,13 @@ def game():
     rows = 5
     columns = 5
     board = make_board(rows, columns)
-
     try:
         with open('game_save.json') as file_object:
             character = json.load(file_object)
-            print("Welcome back, %s!" % character["Name"])
     except FileNotFoundError:
         character = create_character()
+    else:
+        print("Welcome back, %s!" % character["Name"])
     while not end_of_game(character):
         describe_current_location(board, character)
         direction = get_user_choice(character)
