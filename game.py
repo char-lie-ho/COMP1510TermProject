@@ -231,30 +231,6 @@ def advance(character):
     print('After the term break, you are more refreshed! [Stress: %d]' % character["Stress"])
 
 
-def at_interview(character):
-    """
-    Determine if character is at term 4 and at the interview location (4,4).
-
-    :param character: a dictionary describing the character
-    :precondition: character must contain "X-coordinate" and "Y-coordinate" as keys
-    :postcondition: determine if the user is at interview location base on the coordinates
-    :return: a boolean value of whether the character is at interview location
-    >>> character1 = {"X-coordinate": 0, "Y-coordinate": 0}
-    >>> at_interview(character1)
-    False
-    >>> character2 = {"X-coordinate": 4, "Y-coordinate": 4}
-    >>> at_interview(character2)
-    True
-    """
-    x_coordinate = character.get("X-coordinate")
-    y_coordinate = character.get("Y-coordinate")
-
-    if x_coordinate == 4 and y_coordinate == 4:
-        return True
-    else:
-        return False
-
-
 def interview(character):
     """
     Simulate a job interview process and assess the character's suitability for the position.
