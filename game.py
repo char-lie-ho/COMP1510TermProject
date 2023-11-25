@@ -56,12 +56,12 @@ def make_board(rows, columns):
     :postcondition: create a dictionary containing the coordinates as key and locations as value
     :return: a dictionary representing the game board
     """
-    list_of_locations = ('study room', 'library', 'classroom', 'hackathon', 'street')
+    list_of_locations = ('📖study room', '📚library', '🏫classroom', '💻hackathon', '🚶street')
     board = {}
     for row in range(rows):
         for column in range(columns):
             if row == 0 and column == 0:
-                board[(row, column)] = 'home'  # make the start location home (0, 0)
+                board[(row, column)] = '🏠home'  # make the start location home (0, 0)
             elif row == 4 and column == 4:
                 board[(row, column)] = 'interview'  # the final 'boss' location (4, 4)
             else:
@@ -185,23 +185,23 @@ def event(character, difficulty):
     Simulate a typing game where the player attempts to solve a Leetcode question.
     """
     progress = 0
-    print('You are trying solve a Leetcode Question. (Hint: You can type anything to try to solve.)')
-    print('You have finished %d%%' % progress)
+    attempt_times = 0
+    print('You discover an interesting Leetcode Question.🤔\n(Hint: You can type anything to try to solve.)')
     while progress < 100:
-        attempt = input()
+        attempt_text = input()
         # the player will make progress when the enter something
-        if attempt != "":
-            progress += random.randint(5, 50)
-            if progress <= 100:
-                print('You have finished %d%%' % progress)
-            else:
-                print('You have finished 100% ! Great Job.')
-                character["Knowledge"] += (4 - difficulty) * 1  # higher difficulty will have less gained knowledge
-                character["Stress"] += 5 * difficulty  # higher difficulty will result in higher stress
-                print('You have learned from this. [Knowledge = %d]' % character["Knowledge"])
-                print('However, you are more stressed now. [Stress = %d]' % character["Stress"])
+        if attempt_text:
+            attempt_times += 1
+            progress += random.randint(10, 50)
+            progress = min(progress, 100)  # ensure progress doesn't exceed 100
+            print('You have finished %d%%' % progress)
         else:
             print('Hint: You can type anything to try to solve.')
+    character["Knowledge"] += (4 - difficulty) * 1  # higher difficulty will have less gained knowledge
+    character["Stress"] += attempt_times
+    print('Great job, %s! ' % character['Name'])
+    print('You have learned from this. [Knowledge = %d]' % character["Knowledge"])
+    print('However, you are more stressed now. [Stress = %d]' % character["Stress"])
 
 
 def character_advance(character):
@@ -297,6 +297,7 @@ def interview(character):
 def overwhelmed(character):
     """
     Check if character's stress reached 50.
+
     """
     if character["Stress"] >= 50:
         return True
@@ -346,7 +347,7 @@ def game():
                         advance(character)
             got_hired = check_if_hired(character)
         else:
-            print("Ouch! You hit a wall! ")
+            print("Ouch! You hit a wall! 🧱")
     if got_hired:
         print('-'*80)
         print("We need you!")
