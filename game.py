@@ -298,6 +298,9 @@ def check_if_hired(character):  # should i keep this?
 
 
 def determine_location(character, board, difficulty):
+    """
+    Obtain character's location to determine the trigger event.
+    """
     x_coordinate = character.get("X-coordinate")
     y_coordinate = character.get("Y-coordinate")
     current_location = board[(x_coordinate, y_coordinate)]
@@ -311,8 +314,12 @@ def determine_location(character, board, difficulty):
 
 
 def home(character):
-    # decrease stress
-    pass
+    """
+    Decrease character's stress when at home.
+    """
+    character["Stress"] = max(character["Stress"] - 3, 0)  # decrease stress by 3, but won't go below zero
+    print("Your cat welcomes you home 🐈")
+    print("You have lower your stress [Stress = %d]" % character["Stress"])
 
 
 def game():
