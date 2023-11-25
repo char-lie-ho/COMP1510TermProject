@@ -20,16 +20,18 @@ def create_character():
     while proceed not in ['Y', 'YES']:
         proceed = input("Is this correct? (Y/N) ").upper()
     character = {"X-coordinate": 0, "Y-coordinate": 0, "Knowledge": 0, "Term": 1, "Stress": 0, "Name": character_name,
-                 "Hired": False}
+                 "Hired": False, "Difficulty": None}
+    game_difficulty(character)
+
     return character
 
 
-def game_difficulty():
+def game_difficulty(character):
     """
     Ask the player for the game difficulty.
 
     postcondition: initialize character coordinates, knowledge, term, stress, and name
-    :return: representing the chosen difficulty level (1 for easy, 2 for medium, 3 for difficult)
+    :return: character dictionary
     """
     while True:
         difficulty = input("Life is hard, how hard you want this adventure to be on a scale "
@@ -44,7 +46,9 @@ def game_difficulty():
                 continue
             else:
                 print("Great! I like your choice.")
-                return float(difficulty)
+                character["Difficulty"] = float(difficulty)
+                break
+    return character
 
 
 def make_board(rows, columns):
@@ -186,10 +190,11 @@ def encounter_event():
         return False
 
 
-def event(character, difficulty):
+def event(character):
     """
     Simulate a typing game where the player attempts to solve a Leetcode question.
     """
+    difficulty = character["Difficulty"]
     progress = 0
     attempt_times = 0
     print('You discover an interesting Leetcode Question.🤔\n(Hint: You can type anything to try to solve.)')
@@ -303,7 +308,7 @@ def check_if_hired(character):  # should i keep this?
         return False
 
 
-def determine_location(character, board, difficulty):
+def determine_location(character, board):
     """
     Obtain character's location to determine the trigger event.
     """
@@ -316,7 +321,7 @@ def determine_location(character, board, difficulty):
         interview(character)
     else:
         if encounter_event():
-            event(character, difficulty)
+            event(character)
 
 
 def home(character):
@@ -334,17 +339,20 @@ def game():
     """
     rows = 5
     columns = 5
-    character = create_character()
-    difficulty = game_difficulty()
     board = make_board(rows, columns)
     got_hired = False
+    try:
+        with open('game_save.json') as file_object:
+            character = json.load(file_object)
+    except FileNotFoundError:
+        character = create_character()
     while not overwhelmed(character) and not got_hired:
         describe_current_location(board, character)
         direction = get_user_choice(character)
         valid_move = validate_move(board, character, direction)
         if valid_move:
             move_character(character, direction)
-            determine_location(character, board, difficulty)
+            determine_location(character, board)
             if character_advance(character):
                 advance(character)
             got_hired = check_if_hired(character)
