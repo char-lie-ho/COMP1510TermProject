@@ -13,16 +13,9 @@ def create_character():
     postcondition: initialize character coordinates, knowledge, term, stress, and name
     :return: a dictionary contain character info
     """
-    print('-' * 80)
-    print("I am pleased to inform you that you have been accepted to Level 1 of the CST program. ")
-    print("Congratulations and best wishes in your future studies.")
-    print('-' * 80)
-    print('\t \t \t \t Tips for playing')
-    print('1. You are a student, which means you have to gain knowledge to advance to other terms.')
-    print('2. Keep your stress level below 50, or you will pass out.')
-    print('3. You goal is to get hired at Term 4, you can go to location (4,4) for job interview.')
-    print('4. If your knowledge is <= 15, you will not be hired.')
-    print('-' * 80)
+    with open("intro.txt") as file_object:
+        text = file_object.read()
+        print(text)
     character_name = input("Tell me, what is your name? ")
     print("So, your name is %s" % character_name)
     proceed = input("Is this correct? (Y/N) ").upper()
@@ -32,7 +25,6 @@ def create_character():
     character = {"X-coordinate": 0, "Y-coordinate": 0, "Knowledge": 0, "Term": 1, "Stress": 0, "Name": character_name,
                  "Hired": False, "Difficulty": None}
     game_difficulty(character)
-
     return character
 
 
@@ -40,8 +32,10 @@ def game_difficulty(character):
     """
     Ask the player for the game difficulty.
 
-    postcondition: initialize character coordinates, knowledge, term, stress, and name
-    :return: character dictionary
+    :param character: a dictionary contains character status
+    :precondition: character must contain 'Difficulty' as keys
+    postcondition: the 'Difficulty' key in the 'character' dictionary will be updated based on the user's input
+    :return: the updated character dictionary
     """
     while True:
         difficulty = input("Life is hard, how hard you want this adventure to be on a scale "
@@ -294,7 +288,6 @@ def interview(character):
 def end_of_game(character):
     """
     Check if character's stress reached 50 or got hired.
-
     """
     if character["Stress"] >= 50 or character["Hired"]:
         return True
