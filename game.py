@@ -3,6 +3,7 @@ Charlie Ho
 A01358146
 """
 import random
+import json
 
 
 def create_character():
@@ -93,7 +94,7 @@ def describe_current_location(board, character):
     return current_location
 
 
-def get_user_choice():
+def get_user_choice(character):
     """
     Obtain the user's choice of direction (North, East, South, or West) or quit game.
 
@@ -103,7 +104,9 @@ def get_user_choice():
     decision = input('Please enter a direction you want to go (N: North| E: East| S: South| W: West): ').upper()
     while decision not in ['N', 'S', 'E', 'W']:
         if decision == 'QUIT':
-            print("OK, good bye!")
+            with open('game_save.json', 'w') as output:
+                json.dump(character, output)
+            print("Progress has been saved. Good bye!")
             quit()
         decision = input('Not a valid option.\nPlease re-enter a direction you want to go '
                          '(N: North| E: East| S: South| W: West): ').upper()
@@ -337,7 +340,7 @@ def game():
     got_hired = False
     while not overwhelmed(character) and not got_hired:
         describe_current_location(board, character)
-        direction = get_user_choice()
+        direction = get_user_choice(character)
         valid_move = validate_move(board, character, direction)
         if valid_move:
             move_character(character, direction)
