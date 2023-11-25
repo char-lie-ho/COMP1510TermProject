@@ -39,11 +39,11 @@ def game_difficulty():
             print("Oh, you can't even type numbers?!")  # if user input is not a number
         else:
             if float(difficulty) not in [1, 2, 3]:  # if user input is not an integer
-                print("Please enter an integer.")
+                print("Oh, I hope you can enter an integer.")
                 continue
             else:
                 print("Great! I like your choice.")
-                return int(difficulty)
+                return float(difficulty)
 
 
 def make_board(rows, columns):
@@ -95,16 +95,19 @@ def describe_current_location(board, character):
 
 def get_user_choice():
     """
-    Obtain the user's choice of direction (North, East, South, or West).
+    Obtain the user's choice of direction (North, East, South, or West) or quit game.
 
     :postcondition: ensures that the user's choice is valid (N, E, S, or W)
     :return: a string with the user's chosen direction
     """
-    direction = input('Please enter a direction you want to go (N: North| E: East| S: South| W: West): ').upper()
-    while direction not in ['N', 'S', 'E', 'W']:
-        direction = input('Not a valid option.\n'
-                          'Please re-enter a direction you want to go (N: North| E: East| S: South| W: West): ').upper()
-    return direction
+    decision = input('Please enter a direction you want to go (N: North| E: East| S: South| W: West): ').upper()
+    while decision not in ['N', 'S', 'E', 'W']:
+        if decision == 'QUIT':
+            print("OK, good bye!")
+            quit()
+        decision = input('Not a valid option.\nPlease re-enter a direction you want to go '
+                         '(N: North| E: East| S: South| W: West): ').upper()
+    return decision
 
 
 def validate_move(board, character, direction):
@@ -344,13 +347,13 @@ def game():
             got_hired = check_if_hired(character)
         else:
             print("Ouch! You hit a wall! 🧱")
-    if got_hired:
+    if got_hired: # good end
         print('-'*80)
         print("We need you!")
         print("Congrats! You have landed your dream job!")
         print('-'*80)
 
-    if overwhelmed(character):
+    if overwhelmed(character):  # bad end
         print('-'*80)
         print("Sorry! You have passed out and when you wake up, you no longer want to go to school.")
         print('-'*80)
