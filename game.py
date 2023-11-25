@@ -13,6 +13,16 @@ def create_character():
     postcondition: initialize character coordinates, knowledge, term, stress, and name
     :return: a dictionary contain character info
     """
+    print('-' * 80)
+    print("I am pleased to inform you that you have been accepted to Level 1 of the CST program. ")
+    print("Congratulations and best wishes in your future studies.")
+    print('-' * 80)
+    print('\t \t \t \t Tips for playing')
+    print('1. You are a student, which means you have to gain knowledge to advance to other terms.')
+    print('2. Keep your stress level below 50, or you will pass out.')
+    print('3. You goal is to get hired at Term 4, you can go to location (4,4) for job interview.')
+    print('4. If your knowledge is <= 15, you will not be hired.')
+    print('-' * 80)
     character_name = input("Tell me, what is your name? ")
     print("So, your name is %s" % character_name)
     proceed = input("Is this correct? (Y/N) ").upper()
@@ -22,7 +32,6 @@ def create_character():
     character = {"X-coordinate": 0, "Y-coordinate": 0, "Knowledge": 0, "Term": 1, "Stress": 0, "Name": character_name,
                  "Hired": False, "Difficulty": None}
     game_difficulty(character)
-
     return character
 
 
@@ -344,6 +353,7 @@ def game():
     try:
         with open('game_save.json') as file_object:
             character = json.load(file_object)
+            print("Welcome back, %s!" % character["Name"])
     except FileNotFoundError:
         character = create_character()
     while not overwhelmed(character) and not got_hired:
@@ -374,16 +384,6 @@ def main():
     """
     Execute the game function.
     """
-    print('-' * 80)
-    print("I am pleased to inform you that you have been accepted to Level 1 of the CST program. ")
-    print("Congratulations and best wishes in your future studies.")
-    print('-' * 80)
-    print('\t \t \t \t Tips for playing')
-    print('1. You are a student, which means you have to gain knowledge to advance to other terms.')
-    print('2. Keep your stress level below 50, or you will pass out.')
-    print('3. You goal is to get hired at Term 4, you can go to location (4,4) for job interview.')
-    print('4. If your knowledge is <= 15, you will not be hired.')
-    print('-' * 80)
     game()
 
 
