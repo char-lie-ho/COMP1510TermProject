@@ -32,6 +32,7 @@ def create_character():
     character = {"X-coordinate": 0, "Y-coordinate": 0, "Knowledge": 0, "Term": 1, "Stress": 0, "Name": character_name,
                  "Hired": False, "Difficulty": None}
     game_difficulty(character)
+
     return character
 
 
@@ -290,28 +291,12 @@ def interview(character):
         return character
 
 
-def overwhelmed(character):
+def end_of_game(character):
     """
-    Check if character's stress reached 50.
+    Check if character's stress reached 50 or got hired.
 
     """
-    if character["Stress"] >= 50:
-        return True
-    else:
-        return False
-
-
-def check_if_hired(character):  # should i keep this?
-    """
-       Check if the character has been hired.
-
-       :param character: a dictionary representing the character, including "Hired" as key
-       :postcondition: retrieve boolean value inside dictionary with the key "Hired"
-       :return: the boolean vlue
-        >>> check_if_hired({"Hired": False})
-        False
-       """
-    if character["Hired"]:
+    if character["Stress"] >= 50 or character["Hired"]:
         return True
     else:
         return False
@@ -349,14 +334,14 @@ def game():
     rows = 5
     columns = 5
     board = make_board(rows, columns)
-    got_hired = False
+
     try:
         with open('game_save.json') as file_object:
             character = json.load(file_object)
             print("Welcome back, %s!" % character["Name"])
     except FileNotFoundError:
         character = create_character()
-    while not overwhelmed(character) and not got_hired:
+    while not end_of_game(character):
         describe_current_location(board, character)
         direction = get_user_choice(character)
         valid_move = validate_move(board, character, direction)
@@ -365,16 +350,15 @@ def game():
             determine_location(character, board)
             if character_advance(character):
                 advance(character)
-            got_hired = check_if_hired(character)
         else:
             print("Ouch! You hit a wall! 🧱")
-    if got_hired: # good end
+    if character["Hired"]:  # good end
         print('-'*80)
         print("We need you!")
         print("Congrats! You have landed your dream job!")
         print('-'*80)
 
-    if overwhelmed(character):  # bad end
+    if character["Stress"] >= 50:  # bad end
         print('-'*80)
         print("Sorry! You have passed out and when you wake up, you no longer want to go to school.")
         print('-'*80)
