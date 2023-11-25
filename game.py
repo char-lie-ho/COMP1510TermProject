@@ -158,8 +158,6 @@ def move_character(character, direction):
     :precondition: character must contain "X-coordinate", "Y-coordinate" as keys
     :precondition: direction must be either "N", "S", "W", or "E"
     :postcondition: update character's coordinates
-    :return: a dictionary containing character's updated location
-
     >>> character1 = {'X-coordinate': 1, 'Y-coordinate': 1}
     >>> direction1 = 'N'
     >>> move_character(character1, direction1)
@@ -177,7 +175,6 @@ def move_character(character, direction):
         character["X-coordinate"] -= 1
     else:
         character["X-coordinate"] += 1
-    return character
 
 
 def encounter_event():
@@ -221,8 +218,11 @@ def event(character):
 
 def character_advance(character):
     """
-    Determine if character's knowledge is enough to advance to next term.
+    Determine if character's knowledge is enough to advance to the next term.
 
+    :param character: a dictionary describing the character
+    :precondition: character must contain "Term", "Knowledge" as keys
+    :postcondition: calculates whether the character has enough knowledge to advance to the next term
     :return: a boolean value of whether character advances
     """
     character_term = character["Term"]
@@ -238,6 +238,10 @@ def character_advance(character):
 def advance(character):
     """
     Make the character to advance to next term.
+
+    :param character: a dictionary describing the character
+    :precondition: character must contain "Term" and "Stress" as keys
+    :postcondition: updates the character's term, and reduces stress
     """
     character["Term"] += 1
     print('Excellent!')
@@ -253,7 +257,6 @@ def interview(character):
     :param character: a dictionary describing the character
     :precondition: character must contain "Knowledge" and "Stress"as keys
     :postcondition: modify the character's info based on the game's outcome
-    :return: a boolean value of whether the character is at interview location
     """
     # the character has to have 15 knowledge to have a chance to be hired
     print('You have arrive the interview room.')
@@ -264,7 +267,6 @@ def interview(character):
         print('Please try to study more and come back.')
         print('You are exhausted from this interview. [Stress = %d]' % character["Stress"])
         print('However, you also learn from this. [Knowledge = %d]' % character["Knowledge"])
-        return character
     else:
         actual_number = random.randint(1, 5)
         guess_number = input('People say interviewing is a numbers game, let\'s pick a number between 1 and 5. ')
@@ -282,7 +284,6 @@ def interview(character):
                 print('[Stress +5], your current stress is [Stress = %d]' % character["Stress"])
             else:
                 character["Hired"] = True
-        return character
 
 
 def end_of_game(character):
