@@ -327,6 +327,22 @@ def home(character):
     print("You have lower your stress [Stress = %d]" % character["Stress"])
 
 
+def load_progress():
+    """
+    Load the previous saved progress.
+    """
+    with open('game_save.json') as file_object:
+        character = json.load(file_object)
+    decision = None
+    while decision not in ["Y", "N"]:
+        decision = input('You have a saved progress, do you want to load the progress? (Y/N) ').upper()
+    if decision == "Y":
+        print("Welcome back, %s!" % character["Name"])
+    else:
+        character = create_character()
+    return character
+
+
 def game():
     """
     Start the game.
@@ -335,12 +351,11 @@ def game():
     columns = 5
     board = make_board(rows, columns)
     try:
-        with open('game_save.json') as file_object:
-            character = json.load(file_object)
+        open('game_save.json')  # not sure if i need to close this or use with open
     except FileNotFoundError:
         character = create_character()
     else:
-        print("Welcome back, %s!" % character["Name"])
+        character = load_progress()
     while not end_of_game(character):
         describe_current_location(board, character)
         direction = get_user_choice(character)
