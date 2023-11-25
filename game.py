@@ -56,16 +56,16 @@ def make_board(rows, columns):
     :postcondition: create a dictionary containing the coordinates as key and locations as value
     :return: a dictionary representing the game board
     """
-    list_of_locations = ('📖study room', '📚library', '🏫classroom', '💻hackathon', '🚶street')
+    locations = ('📖study room', '📚library', '🏫classroom', '💻hackathon', '🚶street')
     board = {}
     for row in range(rows):
         for column in range(columns):
             if row == 0 and column == 0:
                 board[(row, column)] = '🏠home'  # make the start location home (0, 0)
             elif row == 4 and column == 4:
-                board[(row, column)] = 'interview'  # the final 'boss' location (4, 4)
+                board[(row, column)] = '💼interview'  # the final 'boss' location (4, 4)
             else:
-                board[(row, column)] = random.choice(list_of_locations)  # randomly create locations
+                board[(row, column)] = random.choice(locations)  # randomly create locations
     return board
 
 
@@ -321,6 +321,24 @@ def check_if_hired(character):  # should i keep this?
         return False
 
 
+def determine_location(character, board, difficulty):
+    x_coordinate = character.get("X-coordinate")
+    y_coordinate = character.get("Y-coordinate")
+    current_location = board[(x_coordinate, y_coordinate)]
+    if current_location == '🏠home':
+        home(character)
+    elif current_location == '💼interview':
+        interview(character)
+    else:
+        if encounter_event():
+            event(character, difficulty)
+
+
+def home(character):
+    # decrease stress
+    pass
+
+
 def game():
     """
     Start the game.
@@ -337,14 +355,9 @@ def game():
         valid_move = validate_move(board, character, direction)
         if valid_move:
             move_character(character, direction)
-            if at_interview(character):
-                interview(character)
-            else:
-                there_is_an_event = encounter_event()
-                if there_is_an_event:
-                    event(character, difficulty)
-                    if character_advance(character):
-                        advance(character)
+            determine_location(character, board, difficulty)
+            if character_advance(character):
+                advance(character)
             got_hired = check_if_hired(character)
         else:
             print("Ouch! You hit a wall! 🧱")
