@@ -288,7 +288,18 @@ def interview(character):
 
 def end_of_game(character):
     """
-    Check if character's stress reached 50 or got hired.
+    Check if the character has reached the endgame conditions.
+
+    :param character: a dictionary describing the character status
+    :precondition: character must contain "Stress" and "Hired" as keys
+    :postcondition: determines whether the character's stress is over 50 or 'Hired' status is True
+    :return: a boolean value of whether game ends
+    >>> character1 = {"Stress": 50, "Hired": False}
+    >>> end_of_game(character1)
+    True
+    >>> character2 = {"Stress": 21, "Hired": True}
+    >>> end_of_game(character2)
+    True
     """
     if character["Stress"] >= 50 or character["Hired"]:
         return True
@@ -367,7 +378,7 @@ def game():
         print("Congrats! You have landed your dream job!")
         print('-' * 80)
 
-    if character["Stress"] >= 50:  # bad end
+    elif character["Stress"] >= 50:  # bad end
         print('-' * 80)
         print("Sorry! You have passed out and when you wake up, you no longer want to go to school.")
         print('-' * 80)
