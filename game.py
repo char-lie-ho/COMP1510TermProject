@@ -106,12 +106,30 @@ def describe_current_location(board, character):
 def display_map(x_coordinate, y_coordinate):
     """
     Display a simple map.
+
+    :param x_coordinate: x-coordinate of the character
+    :param y_coordinate: y-coordinate of the character
+    :precondition: x_coordinate must be non-negative integer and less than 5
+    :precondition: y_coordinate must be non-negative integer and less than 5
+    :postcondition: prints a map with borders and a character at the specified coordinates
     """
-    for row in range(5):  # hardcode here
-        map_in_list = ["\t", "_", "_", "_", "_", "_"]
-        if row == y_coordinate:
-            map_in_list[x_coordinate + 1] = 'X'
-        print(" ".join(map_in_list))
+    for row in range(11):
+        top_board = ["\t", "┍", "⎯", "┬", "⎯", "┬", "⎯", "┬", "⎯", "┬", "⎯", "┑"]
+        bottom_board = ["\t", "┕", "⎯", "┴", "⎯", "┴", "⎯", "┴", "⎯", "┴", "⎯", "┙"]
+        center_lines = ["\t", "├", "⎯", "┼", "⎯", "┼", "⎯", "┼", "⎯", "┼", "⎯", "┤"]
+        center_space = ["\t", "|", " ", '|', " ", '|', " ", '|', " ", '|', " ", '|']
+        if row == 0:
+            line_to_print = top_board
+        elif row == 10:
+            line_to_print = bottom_board
+        else:
+            if row % 2 != 0:
+                if y_coordinate * 2 + 1 == row:
+                    center_space[x_coordinate * 2 + 2] = 'x'
+                line_to_print = center_space
+            else:
+                line_to_print = center_lines
+        print(" ".join(line_to_print))
 
 
 def get_user_choice(character):
