@@ -99,7 +99,19 @@ def describe_current_location(board, character):
     y_coordinate = character.get("Y-coordinate")
     current_location = board[(x_coordinate, y_coordinate)]
     print(f"You are now at [%s] on location (%d, %d)" % (current_location, x_coordinate, y_coordinate))
+    display_map(x_coordinate, y_coordinate)
     return current_location
+
+
+def display_map(x_coordinate, y_coordinate):
+    """
+    Display a simple map.
+    """
+    for row in range(5):  # hardcode here
+        map_in_list = ["\t", "_", "_", "_", "_", "_"]
+        if row == y_coordinate:
+            map_in_list[x_coordinate + 1] = 'X'
+        print(" ".join(map_in_list))
 
 
 def get_user_choice(character):
