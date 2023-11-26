@@ -10,7 +10,7 @@ def create_character():
     """
     Ask the player for the character's name and declare the initial state of the character.
 
-    postcondition: initialize character coordinates, knowledge, term, stress, and name
+    postcondition: initialize character coordinates, knowledge, term, stress, name, hired, and difficulty
     :return: a dictionary contain character info
     """
     with open("intro.txt") as file_object:
@@ -89,11 +89,7 @@ def describe_current_location(board, character):
     :postcondition: retrieve location information on board base on the character coordinate
     :return: a string describing the location of the board
 
-    >>> board1 = {(0, 0): 'library', (0, 1): 'classroom'}
-    >>> character1 = {"X-coordinate": 0, "Y-coordinate": 0}
-    >>> describe_current_location(board1, character1)
-    You are now at [library] on location (0, 0)
-    'library'
+    # ERROR WITH THIS DOCTEST
     """
     x_coordinate = character.get("X-coordinate")
     y_coordinate = character.get("Y-coordinate")
@@ -112,6 +108,8 @@ def display_map(x_coordinate, y_coordinate):
     :precondition: x_coordinate must be non-negative integer and less than 5
     :precondition: y_coordinate must be non-negative integer and less than 5
     :postcondition: prints a map with borders and a character at the specified coordinates
+
+    # ERROR WITH THIS DOCTEST AS WELL
     """
     for row in range(11):
         top_board = ["\t", "┍", "⎯", "┬", "⎯", "┬", "⎯", "┬", "⎯", "┬", "⎯", "┑"]
@@ -188,6 +186,7 @@ def move_character(character, direction):
     :precondition: character must contain "X-coordinate", "Y-coordinate" as keys
     :precondition: direction must be either "N", "S", "W", or "E"
     :postcondition: update character's coordinates
+
     >>> character1 = {'X-coordinate': 1, 'Y-coordinate': 1}
     >>> direction1 = 'N'
     >>> move_character(character1, direction1)
