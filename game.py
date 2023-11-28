@@ -10,7 +10,7 @@ def create_character():  # DONE
     """
     Ask the player for the character's name and declare the initial state of the character.
 
-    postcondition: initialize character coordinates, knowledge, term, stress, name, hired, and difficulty
+    :postcondition: initialize character coordinates, knowledge, term, stress, name, hired, and difficulty
     :return: a dictionary contain character info
     """
     with open("intro.txt") as file_object:
@@ -34,7 +34,7 @@ def game_difficulty(character):  # DONE
 
     :param character: a dictionary contains character status
     :precondition: character must contain 'Difficulty' as keys
-    postcondition: the 'Difficulty' key in the 'character' dictionary will be updated based on the user's input
+    :postcondition: the 'Difficulty' key in the 'character' dictionary will be updated based on the user's input
     :return: the updated character dictionary
     """
     while True:
@@ -156,7 +156,7 @@ def validate_move(board, character, direction):  # done
     :precondition: board must contain the location coordinates as key and each value is a string description
     :precondition: character must contain "X-coordinate", "Y-coordinate" and "Current HP" as keys
     :postcondition: validate moves based on character coordinates, width, and height of the board
-    :return: boolean value
+    :return: boolean value True if the move is valid, otherwise False
 
     >>> board1 = {(0, 0): '🏠home', (0, 1): '💻hackathon', (1, 0): '📚library', (1, 1): '🚶street'}
     >>> character1 = {"X-coordinate": 0, "Y-coordinate": 0}
@@ -183,7 +183,7 @@ def validate_move(board, character, direction):  # done
         return True
 
 
-def move_character(character, direction):
+def move_character(character, direction):  # DONE
     """
     Move the character to a new location.
 
@@ -212,7 +212,7 @@ def move_character(character, direction):
         character["X-coordinate"] += 1
 
 
-def encounter_event():
+def encounter_event():  # DONE
     """
     Determine if the player encounters an event.
 
@@ -226,9 +226,13 @@ def encounter_event():
         return False
 
 
-def event(character):
+def event(character):  # DONE
     """
     Simulate a typing game where the player attempts to solve a Leetcode question.
+
+    :param character: a dictionary contains character status
+    :precondition: character must contain 'Difficulty', 'Knowledge','Name', and 'Stress' as keys
+    :postcondition: 'Knowledge' and 'Stress' will be updated based on user's input
     """
     difficulty = character["Difficulty"]
     progress = 0
