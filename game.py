@@ -381,9 +381,14 @@ def determine_location(character, board):  # DONE, no doctest, no unittest
             event(character)
 
 
-def home(character):
+def home(character):  # DONE
     """
     Decrease character's stress when at home.
+
+    :param character: a dictionary describing the character
+    :precondition: character must contain "Stress" as key
+    :precondition: cat.txt must exist in the package
+    :postcondition: reduce character 'Stress' by 3, and print out useful information
     """
     character["Stress"] = max(character["Stress"] - 3, 0)  # decrease stress by 3, but won't go below zero
     with open("cat.txt") as file_object:
