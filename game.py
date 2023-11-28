@@ -75,7 +75,6 @@ def make_board(rows, columns):  # DONE
                 board[(row, column)] = '💼interview'  # the final 'boss' location (4, 4)
             else:
                 board[(row, column)] = random.choice(locations)  # randomly create locations
-    print(board)
     return board
 
 
@@ -282,13 +281,19 @@ def character_advance(character):  # DONE
     return decision_of_advance
 
 
-def advance(character):
+def advance(character):  # DONE
     """
     Make the character to advance to next term.
 
     :param character: a dictionary describing the character
     :precondition: character must contain "Term" and "Stress" as keys
     :postcondition: updates the character's term, and reduces stress
+
+    >>> character1 = {"Term": 1, "Stress": 10}
+    >>> advance(character1)
+    Excellent!
+    You are now in Term 2
+    After the term break, you are more refreshed! [Stress: 5]
     """
     character["Term"] += 1
     print('Excellent!')
@@ -297,7 +302,7 @@ def advance(character):
     print('After the term break, you are more refreshed! [Stress: %d]' % character["Stress"])
 
 
-def interview(character):
+def interview(character):  # DONE
     """
     Simulate a job interview process and assess the character's suitability for the position.
 
@@ -306,7 +311,7 @@ def interview(character):
     :postcondition: modify the character's info based on the game's outcome
     """
     # the character has to have 15 knowledge to have a chance to be hired
-    print('You have arrive the interview room.')
+    print('You have arrive the interview room.💼💻')
     if character["Knowledge"] <= 15:
         character["Stress"] += 10
         character["Knowledge"] += 1
@@ -333,7 +338,7 @@ def interview(character):
                 character["Hired"] = True
 
 
-def end_of_game(character):
+def end_of_game(character):  # DONE
     """
     Check if the character has reached the endgame conditions.
 
@@ -354,9 +359,15 @@ def end_of_game(character):
         return False
 
 
-def determine_location(character, board):
+def determine_location(character, board):  # DONE, no doctest, no unittest
     """
     Obtain character's location to determine the trigger event.
+
+    :param character: a dictionary describing the character
+    :param board: a dictionary describing the board
+    :precondition: character must contain "X-coordinate",and "Y-coordinate" as keys
+    :precondition: board must contain the location coordinates as key and each value is a string description
+    :postcondition: execute different functions based on coordinates of the character and board
     """
     x_coordinate = character.get("X-coordinate")
     y_coordinate = character.get("Y-coordinate")
@@ -375,7 +386,10 @@ def home(character):
     Decrease character's stress when at home.
     """
     character["Stress"] = max(character["Stress"] - 3, 0)  # decrease stress by 3, but won't go below zero
-    print("Your cat welcomes you home 🐈")
+    with open("cat.txt") as file_object:
+        text = file_object.read()
+        print(text)
+    print("Your cat welcomes you home ")
     print("You have lower your stress [Stress = %d]" % character["Stress"])
 
 
