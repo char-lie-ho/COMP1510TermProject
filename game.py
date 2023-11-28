@@ -255,7 +255,7 @@ def event(character):  # DONE
     print('However, you are more stressed now. [Stress = %d]' % character["Stress"])
 
 
-def character_advance(character):
+def character_advance(character):  # DONE
     """
     Determine if character's knowledge is enough to advance to the next term.
 
@@ -263,6 +263,14 @@ def character_advance(character):
     :precondition: character must contain "Term", "Knowledge" as keys
     :postcondition: calculates whether the character has enough knowledge to advance to the next term
     :return: a boolean value of whether character advances
+
+    >>> character1 = {"Knowledge": 0, "Term": 1}
+    >>> character_advance(character1)
+    False
+
+    >>> character2 = {"Knowledge": 6, "Term": 1}
+    >>> character_advance(character2)
+    True
     """
     character_term = character["Term"]
     character_knowledge = character["Knowledge"]
