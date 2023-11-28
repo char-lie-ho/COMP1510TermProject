@@ -398,9 +398,12 @@ def home(character):  # DONE
     print("You have lower your stress [Stress = %d]" % character["Stress"])
 
 
-def load_progress():
+def load_progress():  # DONE
     """
     Load the previous saved progress.
+
+    :postcondition: read the json file to load the game progress or execute the create_character function
+    :return: a dictionary containing the character status
     """
     with open('game_save.json') as file_object:
         character = json.load(file_object)
