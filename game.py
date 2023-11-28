@@ -417,6 +417,26 @@ def load_progress():  # DONE
     return character
 
 
+def end_game(character):
+    """
+    Print out the end game message.
+
+    :param character: a dictionary describing the character
+    :precondition: character must contain "Hired" and "Stress" as key
+    :precondition: game_end1.txt must exist in the package
+    :precondition: game_end2.txt must exist in the package
+    :postcondition: reduce character 'Stress' by 3, and print out useful information
+    """
+    if character["Hired"]:  # good end
+        with open('game_end1.txt') as file_object:
+            text = file_object.read()
+            print(text)
+    elif character["Stress"] >= 50:  # bad end
+        with open('game_end2.txt') as file_object:
+            text = file_object.read()
+            print(text)
+
+
 def game():
     """
     Start the game.
@@ -441,16 +461,7 @@ def game():
                 advance(character)
         else:
             print("Ouch! You hit a wall! 🧱")
-    if character["Hired"]:  # good end
-        print('-' * 80)
-        print("We need you!")
-        print("Congrats! You have landed your dream job!")
-        print('-' * 80)
-
-    elif character["Stress"] >= 50:  # bad end
-        print('-' * 80)
-        print("Sorry! You have passed out and when you wake up, you no longer want to go to school.")
-        print('-' * 80)
+    end_game(character)
 
 
 def main():
