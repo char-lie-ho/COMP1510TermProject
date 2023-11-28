@@ -6,7 +6,7 @@ import random
 import json
 
 
-def create_character():
+def create_character():  # DONE
     """
     Ask the player for the character's name and declare the initial state of the character.
 
@@ -28,7 +28,7 @@ def create_character():
     return character
 
 
-def game_difficulty(character):
+def game_difficulty(character):  # DONE
     """
     Ask the player for the game difficulty.
 
@@ -55,7 +55,7 @@ def game_difficulty(character):
     return character
 
 
-def make_board(rows, columns):
+def make_board(rows, columns):  # DONE
     """
     Generate a game board with the desired size.
 
@@ -75,10 +75,11 @@ def make_board(rows, columns):
                 board[(row, column)] = '💼interview'  # the final 'boss' location (4, 4)
             else:
                 board[(row, column)] = random.choice(locations)  # randomly create locations
+    print(board)
     return board
 
 
-def describe_current_location(board, character):
+def describe_current_location(board, character):  # DONE
     """
     Return the current location on the board.
 
@@ -88,8 +89,6 @@ def describe_current_location(board, character):
     :precondition: character must contain "X-coordinate", "Y-coordinate" and "Current HP" as keys
     :postcondition: retrieve location information on board base on the character coordinate
     :return: a string describing the location of the board
-
-    # ERROR WITH THIS DOCTEST
     """
     x_coordinate = character.get("X-coordinate")
     y_coordinate = character.get("Y-coordinate")
@@ -99,7 +98,7 @@ def describe_current_location(board, character):
     return current_location
 
 
-def display_map(x_coordinate, y_coordinate):
+def display_map(x_coordinate, y_coordinate):  # DONE
     """
     Display a simple map.
 
@@ -108,8 +107,6 @@ def display_map(x_coordinate, y_coordinate):
     :precondition: x_coordinate must be non-negative integer and less than 5
     :precondition: y_coordinate must be non-negative integer and less than 5
     :postcondition: prints a map with borders and a character at the specified coordinates
-
-    # ERROR WITH THIS DOCTEST AS WELL
     """
     for row in range(11):
         top_board = ["\t", "┍", "⎯", "┬", "⎯", "┬", "⎯", "┬", "⎯", "┬", "⎯", "┑"]
@@ -130,7 +127,7 @@ def display_map(x_coordinate, y_coordinate):
         print(" ".join(line_to_print))
 
 
-def get_user_choice(character):
+def get_user_choice(character):  # DONE
     """
     Obtain the user's choice of direction (North, East, South, or West) or quit game.
 
@@ -149,7 +146,7 @@ def get_user_choice(character):
     return decision
 
 
-def validate_move(board, character, direction):
+def validate_move(board, character, direction):  # done
     """
     Receive the move direction and determine if the move is valid.
 
@@ -160,6 +157,15 @@ def validate_move(board, character, direction):
     :precondition: character must contain "X-coordinate", "Y-coordinate" and "Current HP" as keys
     :postcondition: validate moves based on character coordinates, width, and height of the board
     :return: boolean value
+
+    >>> board1 = {(0, 0): '🏠home', (0, 1): '💻hackathon', (1, 0): '📚library', (1, 1): '🚶street'}
+    >>> character1 = {"X-coordinate": 0, "Y-coordinate": 0}
+    >>> direction_N = 'N'
+    >>> validate_move(board1, character1, direction_N)
+    False
+    >>> direction_S = 'S'
+    >>> validate_move(board1, character1, direction_S)
+    True
     """
     current_character_x_coordinate = character.get("X-coordinate")
     current_character_y_coordinate = character.get("Y-coordinate")
