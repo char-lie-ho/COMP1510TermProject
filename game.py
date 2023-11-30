@@ -132,7 +132,7 @@ def display_map(x_coordinate, y_coordinate, board):  # DONE, unittest done
     return
 
 
-def get_user_choice(character):  # DONE
+def get_user_choice(character):  # DONE, finish unittest, test input only (return)
     """
     Obtain the user's choice of direction (North, East, South, or West) or quit game.
 
@@ -151,7 +151,7 @@ def get_user_choice(character):  # DONE
     return decision
 
 
-def validate_move(board, character, direction):  # done
+def validate_move(board, character, direction):  # done, finish unittest
     """
     Receive the move direction and determine if the move is valid.
 
@@ -215,7 +215,7 @@ def move_character(character, direction):  # DONE
         character["X-coordinate"] -= 1
     else:
         character["X-coordinate"] += 1
-    return
+    return character
 
 
 def encounter_event():  # DONE
