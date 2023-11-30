@@ -97,7 +97,7 @@ def describe_current_location(board, character):  # DONE, only unittest the retu
     return current_location
 
 
-def display_map(x_coordinate, y_coordinate, board):  # DONE
+def display_map(x_coordinate, y_coordinate, board):  # DONE, unittest done
     """
     Display a simple map.
 
