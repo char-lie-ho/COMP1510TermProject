@@ -124,6 +124,7 @@ def display_map(x_coordinate, y_coordinate):  # DONE
             else:
                 line_to_print = center_lines
         print(" ".join(line_to_print))
+    return
 
 
 def get_user_choice(character):  # DONE
@@ -209,6 +210,7 @@ def move_character(character, direction):  # DONE
         character["X-coordinate"] -= 1
     else:
         character["X-coordinate"] += 1
+    return
 
 
 def encounter_event():  # DONE
@@ -300,6 +302,7 @@ def advance(character):  # DONE
     print('You are now in Term %d' % character["Term"])
     character["Stress"] -= 5
     print('After the term break, you are more refreshed! [Stress: %d]' % character["Stress"])
+    return
 
 
 def interview(character):  # DONE
@@ -336,6 +339,7 @@ def interview(character):  # DONE
                 print('[Stress +5], your current stress is [Stress = %d]' % character["Stress"])
             else:
                 character["Hired"] = True
+    return
 
 
 def end_of_game(character):  # DONE
@@ -379,6 +383,7 @@ def determine_location(character, board):  # DONE, no doctest, no unittest
     else:
         if encounter_event():
             event(character)
+    return
 
 
 def home(character):  # DONE
@@ -396,6 +401,7 @@ def home(character):  # DONE
         print(text)
     print("Your cat welcomes you home ")
     print("You have lower your stress [Stress = %d]" % character["Stress"])
+    return
 
 
 def load_progress():  # DONE
@@ -433,8 +439,9 @@ def end_game(character):
             print(text)
     elif character["Stress"] >= 50:  # bad end
         with open('game_end2.txt') as file_object:
-            text = file_object.read()
+            text = file_object.readlines(3)
             print(text)
+    return
 
 
 def game():
