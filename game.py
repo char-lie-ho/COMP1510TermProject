@@ -6,7 +6,7 @@ import random
 import json
 
 
-def create_character():  # DONE
+def create_character():  # DONE, invoke game_difficult, cannot unittest
     """
     Ask the player for the character's name and declare the initial state of the character.
 
@@ -28,7 +28,7 @@ def create_character():  # DONE
     return character
 
 
-def game_difficulty(character):  # DONE
+def game_difficulty(character):  # DONE, unittest DONE
     """
     Ask the player for the game difficulty.
 
@@ -55,7 +55,7 @@ def game_difficulty(character):  # DONE
     return character
 
 
-def make_board(rows, columns):  # DONE
+def make_board(rows, columns):  # DONE, unittest done
     """
     Generate a game board with the desired size.
 
@@ -71,14 +71,14 @@ def make_board(rows, columns):  # DONE
         for column in range(columns):
             if row == 0 and column == 0:
                 board[(row, column)] = '🏠home'  # make the start location home (0, 0)
-            elif row == 4 and column == 4:
-                board[(row, column)] = '💼interview'  # the final 'boss' location (4, 4)
+            elif row == rows - 1 and column == columns - 1:
+                board[(row, column)] = '💼interview'  # the final 'boss' location is at bottom left corner
             else:
                 board[(row, column)] = random.choice(locations)  # randomly create locations
     return board
 
 
-def describe_current_location(board, character):  # DONE
+def describe_current_location(board, character):  # DONE, only unittest the return
     """
     Return the current location on the board.
 
@@ -93,28 +93,33 @@ def describe_current_location(board, character):  # DONE
     y_coordinate = character.get("Y-coordinate")
     current_location = board[(x_coordinate, y_coordinate)]
     print(f"You are now at [%s] on location (%d, %d)" % (current_location, x_coordinate, y_coordinate))
-    display_map(x_coordinate, y_coordinate)
+    display_map(x_coordinate, y_coordinate, board)
     return current_location
 
 
-def display_map(x_coordinate, y_coordinate):  # DONE
+def display_map(x_coordinate, y_coordinate, board):  # DONE
     """
     Display a simple map.
 
     :param x_coordinate: x-coordinate of the character
     :param y_coordinate: y-coordinate of the character
+    :param board: a dictionary contains the coordinates as key and description of that location as value
     :precondition: x_coordinate must be non-negative integer and less than 5
     :precondition: y_coordinate must be non-negative integer and less than 5
+    :precondition: board must contain the location coordinates as key
     :postcondition: prints a map with borders and a character at the specified coordinates
     """
-    for row in range(11):
-        top_board = ["\t", "┍", "⎯", "┬", "⎯", "┬", "⎯", "┬", "⎯", "┬", "⎯", "┑"]
-        bottom_board = ["\t", "┕", "⎯", "┴", "⎯", "┴", "⎯", "┴", "⎯", "┴", "⎯", "┙"]
-        center_lines = ["\t", "├", "⎯", "┼", "⎯", "┼", "⎯", "┼", "⎯", "┼", "⎯", "┤"]
-        center_space = ["\t", "|", " ", '|', " ", '|', " ", '|', " ", '|', " ", '|']
+    width = max(coordinate[0] for coordinate in board.keys()) + 1
+    height = max(coordinate[1] for coordinate in board.keys()) + 1
+
+    for row in range(height * 2 + 1):
+        top_board = ["\t", "┍", "⎯"] + (width - 1) * ["┬", "⎯"] + ["┑"]
+        bottom_board = ["\t", "┕", "⎯"] + (width - 1) * ["┴", "⎯"] + ["┙"]
+        center_lines = ["\t", "├", "⎯"] + (width - 1) * ["┼", "⎯"] + ["┤"]
+        center_space = ["\t", "|", " "] + (width - 1) * ['|', " "] + ['|']
         if row == 0:
             line_to_print = top_board
-        elif row == 10:
+        elif row == 2 * height:
             line_to_print = bottom_board
         else:
             if row % 2 != 0:
@@ -439,7 +444,7 @@ def end_game(character):
             print(text)
     elif character["Stress"] >= 50:  # bad end
         with open('game_end2.txt') as file_object:
-            text = file_object.readlines(3)
+            text = file_object.read()
             print(text)
     return
 
@@ -448,7 +453,7 @@ def game():
     """
     Start the game.
     """
-    rows = 5
+    rows = 10
     columns = 5
     board = make_board(rows, columns)
     try:
