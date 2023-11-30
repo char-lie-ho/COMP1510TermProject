@@ -1,7 +1,7 @@
 from unittest import TestCase
 from unittest.mock import patch
 from game import get_user_choice
-import io
+
 
 class Test(TestCase):
     @patch('builtins.input', return_value='N')
@@ -33,4 +33,3 @@ class Test(TestCase):
         actual = get_user_choice(_)
         expected = 'E'
         self.assertEqual(expected, actual)
-
