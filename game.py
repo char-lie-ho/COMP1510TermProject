@@ -188,7 +188,7 @@ def validate_move(board, character, direction):  # done, finish unittest
         return True
 
 
-def move_character(character, direction):  # DONE
+def move_character(character, direction):  # DONE, finish unittest
     """
     Move the character to a new location.
 
@@ -218,7 +218,7 @@ def move_character(character, direction):  # DONE
     return character
 
 
-def encounter_event():  # DONE
+def encounter_event():  # DONE, finish unittest
     """
     Determine if the player encounters an event.
 
@@ -404,9 +404,9 @@ def home(character):  # DONE
     with open("cat.txt") as file_object:
         text = file_object.read()
         print(text)
-    print("Your cat welcomes you home ")
+    print("Your cat welcomes you home")
     print("You have lower your stress [Stress = %d]" % character["Stress"])
-    return
+    return character
 
 
 def load_progress():  # DONE
@@ -453,7 +453,7 @@ def game():
     """
     Start the game.
     """
-    rows = 10
+    rows = 5
     columns = 5
     board = make_board(rows, columns)
     try:
