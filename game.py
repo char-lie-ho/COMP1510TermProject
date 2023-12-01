@@ -21,6 +21,7 @@ def describe_current_location(board, character):  # DONE, only unittest the retu
     x_coordinate = character.get("X-coordinate")
     y_coordinate = character.get("Y-coordinate")
     current_location = board[(x_coordinate, y_coordinate)]
+    print('-' * 80)
     print(f"You are now at [%s] on location (%d, %d)" % (current_location, x_coordinate, y_coordinate))
     display_map(x_coordinate, y_coordinate, board)
     return current_location

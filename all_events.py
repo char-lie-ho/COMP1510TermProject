@@ -26,6 +26,7 @@ def event(character):  # DONE, finish unittest
     difficulty = character["Difficulty"]
     progress = 0
     attempt_times = 0
+    print('-' * 80)
     print('You discover an interesting Leetcode Question.🤔\n(Hint: You can type anything to try to solve.)')
     while progress < 100:
         attempt_text = input()
@@ -52,7 +53,9 @@ def interview(character):  # DONE
     :precondition: character must contain "Knowledge" as keys
     :postcondition: execute the specific function based on character's knowledge value
     """
-    print('You have arrive the interview room.💼💻')
+    with open('./text/interview.txt') as file_object:
+        text = file_object.read()
+        print(text)
     if character["Knowledge"] <= 15:  # the character has to have 15 knowledge to have a chance to be hired
         handle_unsuccessful_candidate(character)
     else:
