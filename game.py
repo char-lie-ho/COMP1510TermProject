@@ -262,7 +262,7 @@ def event(character):  # DONE, finish unittest
     return character
 
 
-def character_advance(character):  # DONE
+def character_advance(character):  # DONE, unittest done
     """
     Determine if character's knowledge is enough to advance to the next term.
 
