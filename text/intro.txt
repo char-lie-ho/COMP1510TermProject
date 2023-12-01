@@ -16,4 +16,5 @@ Congratulations and best wishes in your future studies.
 2. Keep your stress level below 50, or you will pass out.
 3. You goal is to get hired at Term 4, you can go to location (4,4) for job interview.
 4. If your knowledge is <= 15, you will not be hired.
+5. You can easily save your progress and end game by entering 'QUIT'.
 --------------------------------------------------------------------------------
