@@ -28,6 +28,12 @@ class Test(TestCase):
         character = {"Term": 1, "Stress": 17}
         advance(character)
         the_game_printed_this = mock_output.getvalue()
-        expected_output = ('Excellent!\nYou are now in Term 2\n'
+        expected_output = ('  ______              _ _            _     _ \n' 
+                           ' |  ____|            | | |          | |   | |\n'
+                           ' | |__  __  _____ ___| | | ___ _ __ | |_  | |\n'
+                           ' |  __| \ \/ / __/ _ \ | |/ _ \ |_ \| __| | |\n'
+                           ' | |____ >  < (_|  __/ | |  __/ | | | |_  |_|\n'
+                           ' |______/_/\_\___\___|_|_|\___|_| |_|\__| (_)\n\n'
+                           'You are now in Term 2\n'
                            'After the term break, you are more refreshed! [Stress: 12]\n')
         self.assertEqual(expected_output, the_game_printed_this)

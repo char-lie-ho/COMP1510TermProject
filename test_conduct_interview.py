@@ -35,5 +35,5 @@ class Test(TestCase):
         conduct_interview(character)
         printed_text = mock_output.getvalue()
         expected_output = ("Oh, you can't even type numbers?!\nSorry, your skills and experience do not meet our "
-                          "current needs.\nYour current stress is [Stress = 25]\n")
+                           "current needs.\nYour current stress is [Stress = 25]\n")
         self.assertEqual(expected_output, printed_text)

@@ -28,7 +28,8 @@ class Test(TestCase):
         character = {'Difficulty': 1, 'Knowledge': 1, 'Name': 'Charlie', 'Stress': 10}
         event(character)
         the_game_printed_this = mock_output.getvalue()
-        expected_output = ("You discover an interesting Leetcode Question.🤔\n"
+        expected_output = ("--------------------------------------------------------------------------------\n"
+                           "You discover an interesting Leetcode Question.🤔\n"
                            "(Hint: You can type anything to try to solve.)\n"
                            "You have finished 23%\nYou have finished 74%\n"
                            "You have finished 100%\nGreat job, Charlie!\n"
