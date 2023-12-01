@@ -20,7 +20,8 @@ class Test(TestCase):
         character = {"Stress": 6, "X-coordinate": 0, "Y-coordinate": 0}
         home(character)
         printed_cat_and_status = mock_output.getvalue()
-        expected_output = ("   |\      _,,,---,,_\n"
+        expected_output = ("--------------------------------------------------------------------------------\n"
+                           "   |\      _,,,---,,_\n"
                            "   /,`.-'`'    -.  ;-;;,_\n"
                            "  |,4-  ) )-,_..;\ (  `'-'\n"
                            " '---''(_/--'  `-'\_) \n"
