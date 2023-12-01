@@ -232,7 +232,7 @@ def encounter_event():  # DONE, finish unittest
         return False
 
 
-def event(character):  # DONE
+def event(character):  # DONE, finish unittest
     """
     Simulate a typing game where the player attempts to solve a Leetcode question.
 
@@ -256,9 +256,10 @@ def event(character):  # DONE
             print('Hint: You can type anything to try to solve.')
     character["Knowledge"] += (4 - difficulty) * 1  # higher difficulty will have less gained knowledge
     character["Stress"] += attempt_times
-    print('Great job, %s! ' % character['Name'])
+    print('Great job, %s!' % character['Name'])
     print('You have learned from this. [Knowledge = %d]' % character["Knowledge"])
     print('However, you are more stressed now. [Stress = %d]' % character["Stress"])
+    return character
 
 
 def character_advance(character):  # DONE
@@ -391,7 +392,7 @@ def determine_location(character, board):  # DONE, no doctest, no unittest
     return
 
 
-def home(character):  # DONE
+def home(character):  # DONE, finish unittest
     """
     Decrease character's stress when at home.
 
@@ -409,7 +410,7 @@ def home(character):  # DONE
     return character
 
 
-def load_progress():  # DONE
+def load_progress():  # DONE, can't unittest
     """
     Load the previous saved progress.
 
