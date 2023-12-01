@@ -118,7 +118,7 @@ def home(character):  # DONE, finish unittest
     :postcondition: reduce character 'Stress' by 3, and print out useful information
     """
     character["Stress"] = max(character["Stress"] - 3, 0)  # decrease stress by 3, but won't go below zero
-    with open("cat.txt") as file_object:
+    with open("./text/cat.txt") as file_object:
         text = file_object.read()
         print(text)
     print("Your cat welcomes you home")

@@ -8,7 +8,7 @@ def create_character():  # DONE, invoke game_difficult, cannot unittest
     :postcondition: initialize character coordinates, knowledge, term, stress, name, hired, and difficulty
     :return: a dictionary contain character info
     """
-    with open("intro.txt") as file_object:
+    with open("./text/intro.txt") as file_object:
         text = file_object.read()
         print(text)
     character_name = input("Tell me, what is your name? ")

@@ -182,7 +182,9 @@ def advance(character):  # DONE, finish unittest
     :postcondition: updates the character's term, and reduces stress
     """
     character["Term"] += 1
-    print('Excellent!')
+    with open('./text/advance.txt') as file_object:
+        text = file_object.read()
+        print(text)
     print('You are now in Term %d' % character["Term"])
     character["Stress"] = max(character["Stress"] - 5, 0)
     print('After the term break, you are more refreshed! [Stress: %d]' % character["Stress"])
@@ -262,11 +264,11 @@ def end_game(character):  # no need to unittest, print only
     :postcondition: reduce character 'Stress' by 3, and print out useful information
     """
     if character["Hired"]:  # good end
-        with open('game_end1.txt') as file_object:
+        with open('./text/game_end1.txt') as file_object:
             text = file_object.read()
             print(text)
     elif character["Stress"] >= 50:  # bad end
-        with open('game_end2.txt') as file_object:
+        with open('./text/game_end2.txt') as file_object:
             text = file_object.read()
             print(text)
     return
