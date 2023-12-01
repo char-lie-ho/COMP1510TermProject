@@ -7,13 +7,13 @@ import io
 class Test(TestCase):
     def test_home_start_from_10_stress(self):
         character = {"Stress": 10, "X-coordinate": 0, "Y-coordinate": 0}
-        expected = {"Stress": 7, "X-coordinate": 0, "Y-coordinate": 0}
-        self.assertEqual(home(character), expected)
+        home(character)
+        self.assertEqual(character['Stress'], 7)
 
     def test_home_start_from_1_stress(self):
         character = {"Stress": 1, "X-coordinate": 0, "Y-coordinate": 0}
-        expected = {"Stress": 0, "X-coordinate": 0, "Y-coordinate": 0}
-        self.assertEqual(home(character), expected)
+        home(character)
+        self.assertEqual(character['Stress'], 0)
 
     @patch('sys.stdout', new_callable=io.StringIO)
     def test_home_start_from_6_stress(self, mock_output):
@@ -24,7 +24,6 @@ class Test(TestCase):
                            "   /,`.-'`'    -.  ;-;;,_\n"
                            "  |,4-  ) )-,_..;\ (  `'-'\n"
                            " '---''(_/--'  `-'\_) \n"
-                            "Your cat welcomes you home\n"
-                            "You have lower your stress [Stress = 3]\n")
+                           "Your cat welcomes you home\n"
+                           "You have lower your stress [Stress = 3]\n")
         self.assertEqual(expected_output, printed_cat_and_status)
-

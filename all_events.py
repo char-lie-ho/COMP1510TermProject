@@ -42,7 +42,6 @@ def event(character):  # DONE, finish unittest
     print('Great job, %s!' % character['Name'])
     print('You have learned from this. [Knowledge = %d]' % character["Knowledge"])
     print('However, you are more stressed now. [Stress = %d]' % character["Stress"])
-    return character
 
 
 def interview(character):  # DONE
@@ -124,4 +123,3 @@ def home(character):  # DONE, finish unittest
         print(text)
     print("Your cat welcomes you home")
     print("You have lower your stress [Stress = %d]" % character["Stress"])
-    return character

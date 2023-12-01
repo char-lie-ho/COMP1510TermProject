@@ -9,15 +9,17 @@ class Test(TestCase):
     @patch('random.randint', side_effect=[40, 38, 40])
     def test_event_4_correct_input(self, _, __):
         character = {'Difficulty': 1, 'Knowledge': 5, 'Name': 'Charlie', 'Stress': 10}
-        expected = {'Difficulty': 1, 'Knowledge': 8, 'Name': 'Charlie', 'Stress': 13}
-        self.assertEqual(expected, event(character))
+        event(character)
+        self.assertEqual(character['Knowledge'], 8)
+        self.assertEqual(character['Stress'], 13)
 
     @patch('builtins.input', side_effect=['', '', 'hi', 'i', 'like', 'cats'])
     @patch('random.randint', side_effect=[40, 38, 20, 10])
     def test_event_4_incorrect_correct_input(self, _, __):
         character = {'Difficulty': 2, 'Knowledge': 1, 'Name': 'Charlie', 'Stress': 10}
-        expected = {'Difficulty': 2, 'Knowledge': 3, 'Name': 'Charlie', 'Stress': 14}
-        self.assertEqual(expected, event(character))
+        event(character)
+        self.assertEqual(character['Knowledge'], 3)
+        self.assertEqual(character['Stress'], 14)
 
     @patch('builtins.input', side_effect=['what', 'should', 'i', 'type?'])
     @patch('random.randint', side_effect=[23, 51, 27, 34])
