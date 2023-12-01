@@ -289,7 +289,7 @@ def character_advance(character):  # DONE, unittest done
     return decision_of_advance
 
 
-def advance(character):  # DONE
+def advance(character):  # DONE, finish unittest
     """
     Make the character to advance to next term.
 
@@ -306,7 +306,7 @@ def advance(character):  # DONE
     character["Term"] += 1
     print('Excellent!')
     print('You are now in Term %d' % character["Term"])
-    character["Stress"] -= 5
+    character["Stress"] = max(character["Stress"] - 5, 0)
     print('After the term break, you are more refreshed! [Stress: %d]' % character["Stress"])
     return character
 
@@ -348,7 +348,7 @@ def interview(character):  # DONE
     return
 
 
-def end_of_game(character):  # DONE
+def end_of_game(character):  # DONE, finish unittest
     """
     Check if the character has reached the endgame conditions.
 
