@@ -186,7 +186,6 @@ def advance(character):  # DONE, finish unittest
     print('You are now in Term %d' % character["Term"])
     character["Stress"] = max(character["Stress"] - 5, 0)
     print('After the term break, you are more refreshed! [Stress: %d]' % character["Stress"])
-    return character
 
 
 def end_of_game(character):  # DONE, finish unittest

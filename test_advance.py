@@ -7,18 +7,21 @@ import io
 class Test(TestCase):
     def test_advance_to_term2(self):
         character = {"Term": 1, "Stress": 20}
-        expected = {"Term": 2, "Stress": 15}
-        self.assertEqual(expected, advance(character))
+        advance(character)
+        self.assertEqual(character["Term"], 2)
+        self.assertEqual(character["Stress"], 15)
 
     def test_advance_to_term3(self):
         character = {"Term": 2, "Stress": 14}
-        expected = {"Term": 3, "Stress": 9}
-        self.assertEqual(expected, advance(character))
+        advance(character)
+        self.assertEqual(character["Term"], 3)
+        self.assertEqual(character["Stress"], 9)
 
     def test_advance_to_term3_0stress(self):
-        character = {"Term": 2, "Stress": 0}
-        expected = {"Term": 3, "Stress": 0}
-        self.assertEqual(expected, advance(character))
+        character = {"Term": 2, "Stress": 2}
+        advance(character)
+        self.assertEqual(character["Term"], 3)
+        self.assertEqual(character["Stress"], 0)
 
     @patch('sys.stdout', new_callable=io.StringIO)
     def test_advance_print(self, mock_output):
