@@ -326,7 +326,7 @@ def interview(character):  # DONE
         conduct_interview(character)
 
 
-def handle_unsuccessful_candidate(character):  # DONE
+def handle_unsuccessful_candidate(character):  # DONE, finish unittest
     """
     Handle the case when the character's knowledge is not sufficient for the job.
 
@@ -349,12 +349,12 @@ def handle_unsuccessful_candidate(character):  # DONE
     print('However, you also learn from this. [Knowledge = %d]' % character["Knowledge"])
 
 
-def conduct_interview(character):  # DONE
+def conduct_interview(character):  # DONE, finish unittest
     """
     Simulate a job interview process and assess the character's suitability for the position.
 
     :param character: a dictionary describing the character
-    :precondition: character must contain "Knowledge" and "Stress" as keys
+    :precondition: character must contain "Knowledge", "Stress",and "Hired" as keys
     :postcondition: modify the character's info based on the game's outcome
     """
     actual_number = random.randint(1, 5)
