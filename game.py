@@ -243,7 +243,7 @@ def load_progress():  # DONE, can't unittest
         character = json.load(file_object)
     decision = None
     while decision not in ["Y", "N"]:
-        decision = input('You have a saved progress, do you want to load the progress? (Y/N) ').upper()
+        decision = input('%s is waiting. Do you want to load the progress? (Y/N) ' % character["Name"]).upper()
     if decision == "Y":
         print("Welcome back, %s!" % character["Name"])
     else:
@@ -280,7 +280,8 @@ def game():
     columns = 5
     board = make_board(rows, columns)
     try:
-        open('game_save.json')  # not sure if i need to close this or use with open
+        with open('game_save.json'):
+            print('You have a saved progress.')
     except FileNotFoundError:
         character = create_character()
     else:
