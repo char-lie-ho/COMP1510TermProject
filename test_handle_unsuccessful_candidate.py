@@ -1,5 +1,5 @@
 from unittest import TestCase
-from game import handle_unsuccessful_candidate
+from all_events import handle_unsuccessful_candidate
 from unittest.mock import patch
 import io
 

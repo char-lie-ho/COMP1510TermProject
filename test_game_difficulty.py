@@ -1,6 +1,6 @@
 from unittest import TestCase
 from unittest.mock import patch
-from game import game_difficulty
+from initalize_game import game_difficulty
 import io
 
 

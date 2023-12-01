@@ -1,5 +1,5 @@
 from unittest import TestCase
-from game import conduct_interview
+from all_events import conduct_interview
 from unittest.mock import patch
 import io
 
