@@ -308,7 +308,7 @@ def advance(character):  # DONE
     print('You are now in Term %d' % character["Term"])
     character["Stress"] -= 5
     print('After the term break, you are more refreshed! [Stress: %d]' % character["Stress"])
-    return
+    return character
 
 
 def interview(character):  # DONE
@@ -429,7 +429,7 @@ def load_progress():  # DONE, can't unittest
     return character
 
 
-def end_game(character):
+def end_game(character):  # no need to unittest, print only
     """
     Print out the end game message.
 
