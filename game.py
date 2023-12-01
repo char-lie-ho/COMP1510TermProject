@@ -2,80 +2,9 @@
 Charlie Ho
 A01358146
 """
-import random
 import json
-
-
-def create_character():  # DONE, invoke game_difficult, cannot unittest
-    """
-    Ask the player for the character's name and declare the initial state of the character.
-
-    :postcondition: initialize character coordinates, knowledge, term, stress, name, hired, and difficulty
-    :return: a dictionary contain character info
-    """
-    with open("intro.txt") as file_object:
-        text = file_object.read()
-        print(text)
-    character_name = input("Tell me, what is your name? ")
-    print("So, your name is %s" % character_name)
-    proceed = input("Is this correct? (Y/N) ").upper()
-    # confirm if user has typed the correct name
-    while proceed not in ['Y', 'YES']:
-        proceed = input("Is this correct? (Y/N) ").upper()
-    character = {"X-coordinate": 0, "Y-coordinate": 0, "Knowledge": 0, "Term": 1, "Stress": 0, "Name": character_name,
-                 "Hired": False, "Difficulty": None}
-    game_difficulty(character)
-    return character
-
-
-def game_difficulty(character):  # DONE, unittest DONE
-    """
-    Ask the player for the game difficulty.
-
-    :param character: a dictionary contains character status
-    :precondition: character must contain 'Difficulty' as keys
-    :postcondition: the 'Difficulty' key in the 'character' dictionary will be updated based on the user's input
-    :return: the updated character dictionary
-    """
-    while True:
-        difficulty = input("Life is hard, how hard you want this adventure to be on a scale "
-                           "from 1 (easy) to 3 (difficult)? ")
-        try:
-            float(difficulty)
-        except ValueError:
-            print("Oh, you can't even type numbers?!")  # if user input is not a number
-        else:
-            if float(difficulty) not in [1, 2, 3]:  # if user input is not an integer
-                print("Oh, I hope you can enter an integer.")
-                continue
-            else:
-                print("Great! I like your choice.")
-                character["Difficulty"] = float(difficulty)
-                break
-    return character
-
-
-def make_board(rows, columns):  # DONE, unittest done
-    """
-    Generate a game board with the desired size.
-
-    :param rows: an integer describing the width of the game board
-    :param columns: an integer describing the height of the game board
-    :precondition: both rows and columns are integers greater than or equal to 2
-    :postcondition: create a dictionary containing the coordinates as key and locations as value
-    :return: a dictionary representing the game board
-    """
-    locations = ('📖study room', '📚library', '🏫classroom', '💻hackathon', '🚶street')
-    board = {}
-    for row in range(rows):
-        for column in range(columns):
-            if row == 0 and column == 0:
-                board[(row, column)] = '🏠home'  # make the start location home (0, 0)
-            elif row == rows - 1 and column == columns - 1:
-                board[(row, column)] = '💼interview'  # the final 'boss' location is at bottom left corner
-            else:
-                board[(row, column)] = random.choice(locations)  # randomly create locations
-    return board
+from all_events import encounter_event, event, interview, home
+from initalize_game import create_character, make_board
 
 
 def describe_current_location(board, character):  # DONE, only unittest the return
@@ -218,50 +147,6 @@ def move_character(character, direction):  # DONE, finish unittest
     return character
 
 
-def encounter_event():  # DONE, finish unittest
-    """
-    Determine if the player encounters an event.
-
-    :postcondition: return a boolean value indicating whether the character encounters an event
-    :return: a boolean value of character-event encounter
-    """
-    encounter = random.random()
-    if encounter < 0.25:  # the chance of an event happens is 25%
-        return True
-    else:
-        return False
-
-
-def event(character):  # DONE, finish unittest
-    """
-    Simulate a typing game where the player attempts to solve a Leetcode question.
-
-    :param character: a dictionary contains character status
-    :precondition: character must contain 'Difficulty', 'Knowledge','Name', and 'Stress' as keys
-    :postcondition: 'Knowledge' and 'Stress' will be updated based on user's input
-    """
-    difficulty = character["Difficulty"]
-    progress = 0
-    attempt_times = 0
-    print('You discover an interesting Leetcode Question.🤔\n(Hint: You can type anything to try to solve.)')
-    while progress < 100:
-        attempt_text = input()
-        # the player will make progress when the enter something
-        if attempt_text:
-            attempt_times += 1
-            progress += random.randint(10, 50)
-            progress = min(progress, 100)  # ensure progress doesn't exceed 100
-            print('You have finished %d%%' % progress)
-        else:
-            print('Hint: You can type anything to try to solve.')
-    character["Knowledge"] += (4 - difficulty) * 1  # higher difficulty will have less gained knowledge
-    character["Stress"] += attempt_times
-    print('Great job, %s!' % character['Name'])
-    print('You have learned from this. [Knowledge = %d]' % character["Knowledge"])
-    print('However, you are more stressed now. [Stress = %d]' % character["Stress"])
-    return character
-
-
 def character_advance(character):  # DONE, unittest done
     """
     Determine if character's knowledge is enough to advance to the next term.
@@ -274,7 +159,6 @@ def character_advance(character):  # DONE, unittest done
     >>> character1 = {"Knowledge": 0, "Term": 1}
     >>> character_advance(character1)
     False
-
     >>> character2 = {"Knowledge": 6, "Term": 1}
     >>> character_advance(character2)
     True
@@ -296,12 +180,6 @@ def advance(character):  # DONE, finish unittest
     :param character: a dictionary describing the character
     :precondition: character must contain "Term" and "Stress" as keys
     :postcondition: updates the character's term, and reduces stress
-
-    >>> character1 = {"Term": 1, "Stress": 10}
-    >>> advance(character1)
-    Excellent!
-    You are now in Term 2
-    After the term break, you are more refreshed! [Stress: 5]
     """
     character["Term"] += 1
     print('Excellent!')
@@ -309,70 +187,6 @@ def advance(character):  # DONE, finish unittest
     character["Stress"] = max(character["Stress"] - 5, 0)
     print('After the term break, you are more refreshed! [Stress: %d]' % character["Stress"])
     return character
-
-
-def interview(character):  # DONE
-    """
-    Simulate a job interview screening process based on the knowledge of character.
-
-    :param character: a dictionary describing the character
-    :precondition: character must contain "Knowledge" as keys
-    :postcondition: execute the specific function based on character's knowledge value
-    """
-    print('You have arrive the interview room.💼💻')
-    if character["Knowledge"] <= 15:  # the character has to have 15 knowledge to have a chance to be hired
-        handle_unsuccessful_candidate(character)
-    else:
-        conduct_interview(character)
-
-
-def handle_unsuccessful_candidate(character):  # DONE, finish unittest
-    """
-    Handle the case when the character's knowledge is not sufficient for the job.
-
-    :param character: a dictionary describing the character
-    :precondition: character must contain "Knowledge" and "Stress" as keys
-    :postcondition: modify the character's info based on the unsuccessful interview
-
-    >>> character1 = {"Knowledge": 10, "Stress": 14}
-    >>> handle_unsuccessful_candidate(character1)
-    Sorry, your skills and experience do not meet our current needs.
-    Please try to study more and come back.
-    You are exhausted from this interview. [Stress = 24]
-    However, you also learn from this. [Knowledge = 11]
-    """
-    character["Stress"] += 10
-    character["Knowledge"] += 1
-    print('Sorry, your skills and experience do not meet our current needs.')
-    print('Please try to study more and come back.')
-    print('You are exhausted from this interview. [Stress = %d]' % character["Stress"])
-    print('However, you also learn from this. [Knowledge = %d]' % character["Knowledge"])
-
-
-def conduct_interview(character):  # DONE, finish unittest
-    """
-    Simulate a job interview process and assess the character's suitability for the position.
-
-    :param character: a dictionary describing the character
-    :precondition: character must contain "Knowledge", "Stress",and "Hired" as keys
-    :postcondition: modify the character's info based on the game's outcome
-    """
-    actual_number = random.randint(1, 5)
-    guess_number = input('People say interviewing is a numbers game, let\'s pick a number between 1 and 5. ')
-    try:
-        guess_number = int(guess_number)
-    except ValueError:
-        character["Stress"] += 5
-        print("Oh, you can't even type numbers?!")
-        print('Sorry, your skills and experience do not meet our current needs.')
-        print('Your current stress is [Stress = %d]' % character["Stress"])
-    else:
-        if actual_number != guess_number:
-            character["Stress"] += 5
-            print('Sorry, your skills and experience do not meet our current needs.')
-            print('[Stress +5], your current stress is [Stress = %d]' % character["Stress"])
-        else:
-            character["Hired"] = True
 
 
 def end_of_game(character):  # DONE, finish unittest
@@ -417,24 +231,6 @@ def determine_location(character, board):  # DONE, no doctest, no unittest
         if encounter_event():
             event(character)
     return
-
-
-def home(character):  # DONE, finish unittest
-    """
-    Decrease character's stress when at home.
-
-    :param character: a dictionary describing the character
-    :precondition: character must contain "Stress" as key
-    :precondition: cat.txt must exist in the package
-    :postcondition: reduce character 'Stress' by 3, and print out useful information
-    """
-    character["Stress"] = max(character["Stress"] - 3, 0)  # decrease stress by 3, but won't go below zero
-    with open("cat.txt") as file_object:
-        text = file_object.read()
-        print(text)
-    print("Your cat welcomes you home")
-    print("You have lower your stress [Stress = %d]" % character["Stress"])
-    return character
 
 
 def load_progress():  # DONE, can't unittest
