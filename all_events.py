@@ -56,7 +56,8 @@ def interview(character):  # DONE
     with open('./text/interview.txt') as file_object:
         text = file_object.read()
         print(text)
-    if character["Knowledge"] <= 15:  # the character has to have 15 knowledge to have a chance to be hired
+    minimum_knowledge_to_be_hired = 15
+    if character["Knowledge"] <= minimum_knowledge_to_be_hired:
         handle_unsuccessful_candidate(character)
     else:
         conduct_interview(character)

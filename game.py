@@ -167,10 +167,11 @@ def character_advance(character):  # DONE, unittest done
     character_term = character["Term"]
     character_knowledge = character["Knowledge"]
     decision_of_advance = False
-    # Only 4 terms in this game
-    if character_term < 4:
-        # Each term requires 5 knowledge points
-        decision_of_advance = character_knowledge / 5 >= character_term
+
+    max_term = 4
+    knowledge_per_term = 5
+    if character_term < max_term:
+        decision_of_advance = character_knowledge / knowledge_per_term >= character_term
     return decision_of_advance
 
 
@@ -264,11 +265,12 @@ def end_game(character):  # no need to unittest, print only
     :precondition: game_end2.txt must exist in the package
     :postcondition: reduce character 'Stress' by 3, and print out useful information
     """
+    stress_capacity = 50
     if character["Hired"]:  # good end
         with open('./text/game_end1.txt') as file_object:
             text = file_object.read()
             print(text)
-    elif character["Stress"] >= 50:  # bad end
+    elif character["Stress"] >= stress_capacity:  # bad end
         with open('./text/game_end2.txt') as file_object:
             text = file_object.read()
             print(text)
