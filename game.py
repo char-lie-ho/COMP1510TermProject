@@ -313,39 +313,66 @@ def advance(character):  # DONE, finish unittest
 
 def interview(character):  # DONE
     """
+    Simulate a job interview screening process based on the knowledge of character.
+
+    :param character: a dictionary describing the character
+    :precondition: character must contain "Knowledge" as keys
+    :postcondition: execute the specific function based on character's knowledge value
+    """
+    print('You have arrive the interview room.💼💻')
+    if character["Knowledge"] <= 15:  # the character has to have 15 knowledge to have a chance to be hired
+        handle_unsuccessful_candidate(character)
+    else:
+        conduct_interview(character)
+
+
+def handle_unsuccessful_candidate(character):  # DONE
+    """
+    Handle the case when the character's knowledge is not sufficient for the job.
+
+    :param character: a dictionary describing the character
+    :precondition: character must contain "Knowledge" and "Stress" as keys
+    :postcondition: modify the character's info based on the unsuccessful interview
+
+    >>> character1 = {"Knowledge": 10, "Stress": 14}
+    >>> handle_unsuccessful_candidate(character1)
+    Sorry, your skills and experience do not meet our current needs.
+    Please try to study more and come back.
+    You are exhausted from this interview. [Stress = 24]
+    However, you also learn from this. [Knowledge = 11]
+    """
+    character["Stress"] += 10
+    character["Knowledge"] += 1
+    print('Sorry, your skills and experience do not meet our current needs.')
+    print('Please try to study more and come back.')
+    print('You are exhausted from this interview. [Stress = %d]' % character["Stress"])
+    print('However, you also learn from this. [Knowledge = %d]' % character["Knowledge"])
+
+
+def conduct_interview(character):  # DONE
+    """
     Simulate a job interview process and assess the character's suitability for the position.
 
     :param character: a dictionary describing the character
-    :precondition: character must contain "Knowledge" and "Stress"as keys
+    :precondition: character must contain "Knowledge" and "Stress" as keys
     :postcondition: modify the character's info based on the game's outcome
     """
-    # the character has to have 15 knowledge to have a chance to be hired
-    print('You have arrive the interview room.💼💻')
-    if character["Knowledge"] <= 15:
-        character["Stress"] += 10
-        character["Knowledge"] += 1
+    actual_number = random.randint(1, 5)
+    guess_number = input('People say interviewing is a numbers game, let\'s pick a number between 1 and 5. ')
+    try:
+        guess_number = int(guess_number)
+    except ValueError:
+        character["Stress"] += 5
+        print("Oh, you can't even type numbers?!")
         print('Sorry, your skills and experience do not meet our current needs.')
-        print('Please try to study more and come back.')
-        print('You are exhausted from this interview. [Stress = %d]' % character["Stress"])
-        print('However, you also learn from this. [Knowledge = %d]' % character["Knowledge"])
+        print('Your current stress is [Stress = %d]' % character["Stress"])
     else:
-        actual_number = random.randint(1, 5)
-        guess_number = input('People say interviewing is a numbers game, let\'s pick a number between 1 and 5. ')
-        try:
-            guess_number = int(guess_number)
-        except ValueError:
+        if actual_number != guess_number:
             character["Stress"] += 5
-            print("Oh, you can't even type numbers?!")
             print('Sorry, your skills and experience do not meet our current needs.')
-            print('Your current stress is [Stress = %d]' % character["Stress"])
+            print('[Stress +5], your current stress is [Stress = %d]' % character["Stress"])
         else:
-            if actual_number != guess_number:
-                character["Stress"] += 5
-                print('Sorry, your skills and experience do not meet our current needs.')
-                print('[Stress +5], your current stress is [Stress = %d]' % character["Stress"])
-            else:
-                character["Hired"] = True
-    return
+            character["Hired"] = True
 
 
 def end_of_game(character):  # DONE, finish unittest
