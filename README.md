@@ -66,7 +66,7 @@ This game has been thoroughly tested to minimize potential errors.
     |-- game.py
     |-- initialize_game.py
     |-- level_10_in_aardwolf.pdf
-    |-- term_project_flowchart.pdf
+    |-- game.pdf
     |-- README.md
 
 *** end of document ***
