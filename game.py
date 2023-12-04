@@ -106,9 +106,9 @@ def validate_move(board, character, direction):  # done, finish unittest
     max_x_location = max(coord[0] for coord in board.keys())
     max_y_location = max(coord[1] for coord in board.keys())
     if ((current_character_y_coordinate == 0 and direction == "N") or
-        (current_character_x_coordinate == 0 and direction == "W") or
-        (current_character_x_coordinate == max_x_location and direction == "E") or
-        (current_character_y_coordinate == max_y_location and direction == "S")):
+            (current_character_x_coordinate == 0 and direction == "W") or
+            (current_character_x_coordinate == max_x_location and direction == "E") or
+            (current_character_y_coordinate == max_y_location and direction == "S")):
         return False
     else:
         return True
