@@ -51,13 +51,12 @@ def display_map(x_coordinate, y_coordinate, board):  # DONE, unittest done
             line_to_print = top_board
         elif row == 2 * height:
             line_to_print = bottom_board
+        elif row % 2 != 0:
+            if y_coordinate * 2 + 1 == row:
+                center_space[x_coordinate * 2 + 2] = 'x'
+            line_to_print = center_space
         else:
-            if row % 2 != 0:
-                if y_coordinate * 2 + 1 == row:
-                    center_space[x_coordinate * 2 + 2] = 'x'
-                line_to_print = center_space
-            else:
-                line_to_print = center_lines
+            line_to_print = center_lines
         print(" ".join(line_to_print))
     return
 
@@ -106,13 +105,10 @@ def validate_move(board, character, direction):  # done, finish unittest
     current_character_y_coordinate = character.get("Y-coordinate")
     max_x_location = max(coord[0] for coord in board.keys())
     max_y_location = max(coord[1] for coord in board.keys())
-    if current_character_y_coordinate == 0 and direction == "N":
-        return False
-    elif current_character_x_coordinate == 0 and direction == "W":
-        return False
-    elif current_character_x_coordinate == max_x_location and direction == "E":
-        return False
-    elif current_character_y_coordinate == max_y_location and direction == "S":
+    if ((current_character_y_coordinate == 0 and direction == "N") or
+        (current_character_x_coordinate == 0 and direction == "W") or
+        (current_character_x_coordinate == max_x_location and direction == "E") or
+        (current_character_y_coordinate == max_y_location and direction == "S")):
         return False
     else:
         return True
