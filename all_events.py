@@ -1,4 +1,5 @@
 import random
+import itertools
 
 
 def encounter_event():  # DONE, finish unittest
@@ -25,21 +26,21 @@ def event(character):  # DONE, finish unittest
     """
     difficulty = character["Difficulty"]
     progress = 0
-    attempt_times = 0
+    attempt_counter = itertools.count(0)
     print('-' * 80)
     print('You discover an interesting Leetcode Question.🤔\n(Hint: You can type anything to try to solve.)')
     while progress < 100:
         attempt_text = input()
         # the player will make progress when the enter something
         if attempt_text:
-            attempt_times += 1
+            next(attempt_counter)
             progress += random.randint(10, 50)
             progress = min(progress, 100)  # ensure progress doesn't exceed 100
             print('You have finished %d%%' % progress)
         else:
             print('Hint: You can type anything to try to solve.')
     character["Knowledge"] += (4 - difficulty) * 1  # higher difficulty will have less gained knowledge
-    character["Stress"] += attempt_times
+    character["Stress"] += next(attempt_counter)
     print('Great job, %s!' % character['Name'])
     print('You have learned from this. [Knowledge = %d]' % character["Knowledge"])
     print('However, you are more stressed now. [Stress = %d]' % character["Stress"])
