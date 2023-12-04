@@ -1,4 +1,5 @@
 import random
+import itertools
 
 
 def create_character():  # DONE, invoke game_difficult, cannot unittest
@@ -62,12 +63,12 @@ def make_board(rows, columns):  # DONE, unittest done
     """
     locations = ('📖study room', '📚library', '🏫classroom', '💻hackathon', '🚶street')
     board = {}
-    for row in range(rows):
-        for column in range(columns):
-            if row == 0 and column == 0:
-                board[(row, column)] = '🏠home'  # make the start location home (0, 0)
-            elif row == rows - 1 and column == columns - 1:
-                board[(row, column)] = '💼interview'  # the final 'boss' location is at bottom left corner
-            else:
-                board[(row, column)] = random.choice(locations)  # randomly create locations
+
+    for row, column in itertools.product(range(rows), range(columns)):
+        if row == 0 and column == 0:
+            board[row, column] = '🏠home'  # make the start location home (0, 0)
+        elif row == rows - 1 and column == columns - 1:
+            board[row, column] = '💼interview'  # the final 'boss' location is at bottom left corner
+        else:
+            board[row, column] = random.choice(locations)  # randomly create locations
     return board
