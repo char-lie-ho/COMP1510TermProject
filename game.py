@@ -223,10 +223,10 @@ def determine_location(character, board):  # DONE, no doctest, no unittest
     x_coordinate = character.get("X-coordinate")
     y_coordinate = character.get("Y-coordinate")
     current_location = board[(x_coordinate, y_coordinate)]
-    if current_location == '🏠home':
-        home(character)
-    elif current_location == '💼interview':
-        interview(character)
+    special_locations = {'🏠home': home, '💼interview': interview}  # home, interview are functions
+    if current_location in special_locations:
+        special_events = special_locations.get(current_location)
+        special_events(character)
     else:
         if encounter_event():
             event(character)

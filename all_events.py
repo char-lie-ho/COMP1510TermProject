@@ -71,7 +71,6 @@ def handle_unsuccessful_candidate(character):  # DONE, finish unittest
     :param character: a dictionary describing the character
     :precondition: character must contain "Knowledge" and "Stress" as keys
     :postcondition: modify the character's info based on the unsuccessful interview
-
     >>> character1 = {"Knowledge": 10, "Stress": 14}
     >>> handle_unsuccessful_candidate(character1)
     Sorry, your skills and experience do not meet our current needs.
