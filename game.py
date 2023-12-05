@@ -3,6 +3,7 @@ Charlie Ho
 A01358146
 """
 import json
+import pathlib
 from all_events import encounter_event, event, interview, home
 from initalize_game import create_character, make_board
 
@@ -281,10 +282,9 @@ def game():
     rows = 5
     columns = 5
     board = make_board(rows, columns)
-    try:
-        with open('game_save.json'):
-            print('You have a saved progress.')
-    except FileNotFoundError:
+    save_path = pathlib.Path('/game_save.json')
+    if save_path.exists():
+        print('You have a saved progress.')
         character = create_character()
     else:
         character = load_progress()
