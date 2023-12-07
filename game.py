@@ -6,6 +6,7 @@ import json
 import pathlib
 from all_events import encounter_event, event, interview, home
 from initalize_game import create_character, make_board
+from load_game import load_progress
 
 
 def describe_current_location(board, character):  # DONE, only unittest the return
@@ -232,25 +233,6 @@ def determine_location(character, board):  # DONE, no doctest, no unittest
         if encounter_event():
             event(character)
     return
-
-
-def load_progress():  # DONE, can't unittest
-    """
-    Load the previous saved progress.
-
-    :postcondition: read the json file to load the game progress or execute the create_character function
-    :return: a dictionary containing the character status
-    """
-    with open('game_save.json') as file_object:
-        character = json.load(file_object)
-    decision = None
-    while decision not in ["Y", "N"]:
-        decision = input('%s is waiting. Do you want to load the progress? (Y/N) ' % character["Name"]).upper()
-    if decision == "Y":
-        print("Welcome back, %s!" % character["Name"])
-    else:
-        character = create_character()
-    return character
 
 
 def end_game(character):  # no need to unittest, print only
