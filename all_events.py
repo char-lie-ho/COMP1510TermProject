@@ -30,10 +30,9 @@ def event(character):  # DONE, finish unittest
     print('-' * 80)
     print('You discover an interesting Leetcode Question.🤔\n(Hint: You can type anything to try to solve.)')
     while progress < 100:
-        attempt_text = input()
-        # the player will make progress when the enter something
+        attempt_text = input()  # the players will make progress as long as they enter something
+        next(attempt_counter)
         if attempt_text:
-            next(attempt_counter)
             progress += random.randint(10, 50)
             progress = min(progress, 100)  # ensure progress doesn't exceed 100
             print('You have finished %d%%' % progress)

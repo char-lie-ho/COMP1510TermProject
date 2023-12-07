@@ -51,12 +51,10 @@ def move_character(character, direction):
     >>> move_character(character2, direction2)
     {'X-coordinate': 0, 'Y-coordinate': 1}
     """
-    if direction == "N":
-        character["Y-coordinate"] -= 1
-    elif direction == "S":
-        character["Y-coordinate"] += 1
-    elif direction == "W":
-        character["X-coordinate"] -= 1
-    else:
-        character["X-coordinate"] += 1
+    move_direction = {"N": ("Y-coordinate", - 1), "S": ("Y-coordinate", + 1),
+                      "W": ("Y-coordinate", - 1), "E": ("X-coordinate", + 1)}
+
+    direction_of_character = move_direction[direction][0]
+    moved_space = move_direction[direction][1]
+    character[direction_of_character] += moved_space
     return character
