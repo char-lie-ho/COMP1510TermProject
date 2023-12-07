@@ -1,5 +1,5 @@
 from unittest import TestCase
-from game import validate_move
+from move import validate_move
 
 
 class Test(TestCase):
