@@ -52,7 +52,7 @@ def move_character(character, direction):
     {'X-coordinate': 0, 'Y-coordinate': 1}
     """
     move_direction = {"N": ("Y-coordinate", - 1), "S": ("Y-coordinate", + 1),
-                      "W": ("Y-coordinate", - 1), "E": ("X-coordinate", + 1)}
+                      "W": ("X-coordinate", - 1), "E": ("X-coordinate", + 1)}
 
     direction_of_character = move_direction[direction][0]
     moved_space = move_direction[direction][1]
