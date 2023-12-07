@@ -4,9 +4,10 @@ A01358146
 """
 import json
 import pathlib
+import advance
+import load_game
 from all_events import encounter_event, event, interview, home
 from initalize_game import create_character, make_board
-from load_game import load_progress
 from move import validate_move, move_character
 from end_game import end_of_game, end_game
 
@@ -84,9 +85,6 @@ def get_user_choice(character):  # DONE, finish unittest, test input only (retur
     return decision
 
 
-
-
-
 def determine_location(character, board):  # DONE, no doctest, no unittest
     """
     Obtain character's location to determine the trigger event.
@@ -122,7 +120,7 @@ def game():
         print('You have a saved progress.')
         character = create_character()
     else:
-        character = load_progress()
+        character = load_game.load_progress()
     while not end_of_game(character):
         describe_current_location(board, character)
         direction = get_user_choice(character)
@@ -130,8 +128,8 @@ def game():
         if valid_move:
             move_character(character, direction)
             determine_location(character, board)
-            if character_advance(character):
-                advance(character)
+            if advance.check_advance(character):
+                advance.advance(character)
         else:
             print("Ouch! You hit a wall! 🧱")
     end_game(character)
