@@ -1,5 +1,5 @@
 from unittest import TestCase
-from game import advance
+from advance import advance
 from unittest.mock import patch
 import io
 
