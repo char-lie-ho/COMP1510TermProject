@@ -7,6 +7,8 @@ import pathlib
 from all_events import encounter_event, event, interview, home
 from initalize_game import create_character, make_board
 from load_game import load_progress
+from move import validate_move, move_character
+from end_game import end_of_game, end_game
 
 
 def describe_current_location(board, character):  # DONE, only unittest the return
@@ -127,27 +129,6 @@ def advance(character):  # DONE, finish unittest
     return
 
 
-def end_of_game(character):  # DONE, finish unittest
-    """
-    Check if the character has reached the endgame conditions.
-
-    :param character: a dictionary describing the character status
-    :precondition: character must contain "Stress" and "Hired" as keys
-    :postcondition: determines whether the character's stress is over 50 or 'Hired' status is True
-    :return: a boolean value of whether game ends
-    >>> character1 = {"Stress": 50, "Hired": False}
-    >>> end_of_game(character1)
-    True
-    >>> character2 = {"Stress": 21, "Hired": True}
-    >>> end_of_game(character2)
-    True
-    """
-    if character["Stress"] >= 50 or character["Hired"]:
-        return True
-    else:
-        return False
-
-
 def determine_location(character, board):  # DONE, no doctest, no unittest
     """
     Obtain character's location to determine the trigger event.
@@ -168,28 +149,6 @@ def determine_location(character, board):  # DONE, no doctest, no unittest
     else:
         if encounter_event():
             event(character)
-    return
-
-
-def end_game(character):  # no need to unittest, print only
-    """
-    Print out the end game message.
-
-    :param character: a dictionary describing the character
-    :precondition: character must contain "Hired" and "Stress" as key
-    :precondition: game_end1.txt must exist in the package
-    :precondition: game_end2.txt must exist in the package
-    :postcondition: reduce character 'Stress' by 3, and print out useful information
-    """
-    stress_capacity = 50
-    if character["Hired"]:  # good end
-        with open('./text/game_end1.txt') as file_object:
-            text = file_object.read()
-            print(text)
-    elif character["Stress"] >= stress_capacity:  # bad end
-        with open('./text/game_end2.txt') as file_object:
-            text = file_object.read()
-            print(text)
     return
 
 

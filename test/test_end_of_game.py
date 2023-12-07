@@ -1,8 +1,5 @@
-"""
-Add a docstring
-"""
 from unittest import TestCase
-from game import end_of_game
+from end_game import end_of_game
 
 
 class Test(TestCase):
