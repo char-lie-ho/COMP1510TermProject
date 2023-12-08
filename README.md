@@ -34,6 +34,19 @@ Spoiler alert, don't open the text files after playing the game.
 In the `test`, you will find all the unittests for all functions. 
 This game has been thoroughly tested to minimize potential errors.
 
+#### Required Information
+| Requirement                    | Location                                       | 
+| ------------------------------ | ---------------------------------------------- | 
+| Selection using if-statement   | In `advance.py`, inside `check_advance` function, line 23 | 
+| Using the for-loop              | In `game.py`, inside `display_map` function, line 50 | 
+| Membership operator is used correctly | In `game.py`, inside `get_user_choice` function, line 77 | 
+| Range function is used          | In `game.py`, inside `display_map` function, line 50 | 
+| Itertools is thoughtfully used  | In `all_events.py`, inside `event` function, line 29 | 
+| Random module is used           | In `all_events.py`, inside `encounter_events` function, line 13 | 
+| %-formatting is used            | In `all_events.py`, inside `event` function, line 43 | 
+| List comprehension              | In `move.py`, inside `validate_move` function, line 24 | 
+
+
 #### Contents of folder
     COMP1510TermProject/
     |-- text/
@@ -72,4 +85,5 @@ This game has been thoroughly tested to minimize potential errors.
     |-- test_move_character.py
     |-- test_validate_move.py
     |
+
 *** end of document ***
