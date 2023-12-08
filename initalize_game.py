@@ -37,16 +37,16 @@ def game_difficulty(character):  # DONE, unittest DONE
         difficulty = input("Life is hard, how hard you want this adventure to be on a scale "
                            "from 1 (easy) to 3 (difficult)? ")
         try:
-            float(difficulty)
+            difficulty = int(difficulty)
         except ValueError:
-            print("Oh, you can't even type numbers?!")  # if user input is not a number
+            print("Oh no, you're having a 'keyboard malfunction' moment! Numbers, please.")
         else:
-            if float(difficulty) not in [1, 2, 3]:  # if user input is not an integer
-                print("Oh, I hope you can enter an integer.")
+            if difficulty not in [1, 2, 3]:
+                print("Oh, I hope you can count to 3. Try again!")
                 continue
             else:
                 print("Great! I like your choice.")
-                character["Difficulty"] = float(difficulty)
+                character["Difficulty"] = difficulty
                 break
     return character
 

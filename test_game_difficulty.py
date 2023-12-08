@@ -54,5 +54,5 @@ class Test(TestCase):
                      "Hired": False, "Difficulty": None}
         game_difficulty(character)
         difficulty_printed_this = mock_output.getvalue()
-        expected_output = "Oh, you can't even type numbers?!\nGreat! I like your choice.\n"
+        expected_output = "Oh no, you're having a 'keyboard malfunction' moment! Numbers, please.\nGreat! I like your choice.\n"
         self.assertEqual(expected_output, difficulty_printed_this)
