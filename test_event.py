@@ -19,7 +19,7 @@ class Test(TestCase):
         character = {'Difficulty': 2, 'Knowledge': 1, 'Name': 'Charlie', 'Stress': 10}
         event(character)
         self.assertEqual(character['Knowledge'], 3)
-        self.assertEqual(character['Stress'], 14)
+        self.assertEqual(character['Stress'], 16)
 
     @patch('builtins.input', side_effect=['what', 'should', 'i', 'type?'])
     @patch('random.randint', side_effect=[23, 51, 27, 34])
