@@ -44,29 +44,32 @@ This game has been thoroughly tested to minimize potential errors.
     |   |-- interview.txt
     |   |-- intro.txt
     |
-    |-- tests/
-    |   |-- test_advance.py
-    |   |-- test_character_advance.py
-    |   |-- test_conduct_interview.py
-    |   |-- test_describe_current_location.py
-    |   |-- test_display_map.py
-    |   |-- test_encounter_event.py
-    |   |-- test_end_of_game.py
-    |   |-- test_event.py
-    |   |-- test_game_difficulty.py
-    |   |-- test_get_user_choice.py
-    |   |-- test_handle_unsuccessful_candidate.py
-    |   |-- test_home.py
-    |   |-- test_make_board.py
-    |   |-- test_move_character.py
-    |   |-- test_validate_move.py
-    |
     |-- __init__.py
+    |-- advance.py
     |-- all_events.py
+    |-- end_game.py
     |-- game.py
     |-- initialize_game.py
     |-- level_10_in_aardwolf.pdf
+    |-- load_game.py
+    |-- move.py
     |-- game.pdf
     |-- README.md
-
+    |
+    |-- test_advance.py
+    |-- test_character_advance.py
+    |-- test_conduct_interview.py
+    |-- test_describe_current_location.py
+    |-- test_display_map.py
+    |-- test_encounter_event.py
+    |-- test_end_of_game.py
+    |-- test_event.py
+    |-- test_game_difficulty.py
+    |-- test_get_user_choice.py
+    |-- test_handle_unsuccessful_candidate.py
+    |-- test_home.py
+    |-- test_make_board.py
+    |-- test_move_character.py
+    |-- test_validate_move.py
+    |
 *** end of document ***
