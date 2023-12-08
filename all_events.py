@@ -24,7 +24,6 @@ def event(character):  # DONE, finish unittest
     :precondition: character must contain 'Difficulty', 'Knowledge','Name', and 'Stress' as keys
     :postcondition: 'Knowledge' and 'Stress' will be updated based on user's input
     """
-    difficulty = character["Difficulty"]
     progress = 0
     attempt_counter = itertools.count(0)
     print('-' * 80)
@@ -33,16 +32,14 @@ def event(character):  # DONE, finish unittest
         attempt_text = input()  # the players will make progress as long as they enter something
         next(attempt_counter)
         if attempt_text:
-            progress += random.randint(10, 50)
-            progress = min(progress, 100)  # ensure progress doesn't exceed 100
+            progress = min(progress + random.randint(10, 50), 100)
             print('You have finished %d%%' % progress)
         else:
             print('Hint: You can type anything to try to solve.')
-    character["Knowledge"] += (4 - difficulty) * 1  # higher difficulty will have less gained knowledge
+    character["Knowledge"] += (4 - character["Difficulty"]) * 1  # higher difficulty will have less gained knowledge
     character["Stress"] += next(attempt_counter)
-    print('Great job, %s!' % character['Name'])
-    print('You have learned from this. [Knowledge = %d]' % character["Knowledge"])
-    print('However, you are more stressed now. [Stress = %d]' % character["Stress"])
+    print(f'Great job, {character["Name"]}!\nYou have learned from this. [Knowledge = {character["Knowledge"]}]\n'
+          f'However, you are more stressed now. [Stress = {character["Stress"]}]')
 
 
 def interview(character):  # DONE
