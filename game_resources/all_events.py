@@ -50,7 +50,7 @@ def interview(character):
     :precondition: character must contain "Knowledge" as keys
     :postcondition: execute the specific function based on character's knowledge value
     """
-    with open('../text/interview.txt') as file_object:
+    with open('./text/interview.txt') as file_object:
         text = file_object.read()
         print(text)
     minimum_knowledge_to_be_hired = 15
@@ -118,7 +118,7 @@ def home(character):
     :postcondition: reduce character 'Stress' by 3, and print out useful information
     """
     character["Stress"] = max(character["Stress"] - 3, 0)  # decrease stress by 3, but won't go below zero
-    with open("../text/cat.txt") as file_object:
+    with open("./text/cat.txt") as file_object:
         text = file_object.read()
         print(text)
     print("Your cat welcomes you home")

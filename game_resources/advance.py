@@ -34,7 +34,7 @@ def advance(character):
     :postcondition: updates the character's term, and reduces stress
     """
     character["Term"] += 1
-    with open('../text/advance.txt') as file_object:
+    with open('./text/advance.txt') as file_object:
         text = file_object.read()
         print(text)
     print('You are now in Term %d' % character["Term"])

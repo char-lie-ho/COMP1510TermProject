@@ -31,11 +31,11 @@ def end_game(character):
     """
     stress_capacity = 50
     if character["Hired"]:  # good end
-        with open('../text/game_end1.txt') as file_object:
+        with open('./text/game_end1.txt') as file_object:
             text = file_object.read()
             print(text)
     elif character["Stress"] >= stress_capacity:  # bad end
-        with open('../text/game_end2.txt') as file_object:
+        with open('./text/game_end2.txt') as file_object:
             text = file_object.read()
             print(text)
     return
