@@ -1,18 +1,13 @@
-"""
-Charlie Ho
-A01358146
-"""
 import json
 import pathlib
-import advance
-import load_game
-from all_events import encounter_event, event, interview, home
-from initalize_game import create_character, make_board
-from move import validate_move, move_character
-from end_game import end_of_game, end_game
+from game_resources import advance, load_game
+from game_resources.all_events import encounter_event, event, interview, home
+from game_resources.initalize_game import create_character, make_board
+from game_resources.move import validate_move, move_character
+from game_resources.end_game import end_of_game, end_game
 
 
-def describe_current_location(board, character):  # DONE, only unittest the return
+def describe_current_location(board, character):
     """
     Return the current location on the board.
 
@@ -32,7 +27,7 @@ def describe_current_location(board, character):  # DONE, only unittest the retu
     return current_location
 
 
-def display_map(x_coordinate, y_coordinate, board):  # DONE, unittest done
+def display_map(x_coordinate, y_coordinate, board):
     """
     Display a simple map.
 
@@ -66,7 +61,7 @@ def display_map(x_coordinate, y_coordinate, board):  # DONE, unittest done
     return
 
 
-def get_user_choice(character):  # DONE, finish unittest, test input only (return)
+def get_user_choice(character):  
     """
     Obtain the user's choice of direction (North, East, South, or West) or quit game.
 
@@ -85,7 +80,7 @@ def get_user_choice(character):  # DONE, finish unittest, test input only (retur
     return decision
 
 
-def determine_location(character, board):  # DONE, no doctest, no unittest
+def determine_location(character, board):
     """
     Obtain character's location to determine the trigger event.
 
@@ -118,9 +113,9 @@ def game():
     save_path = pathlib.Path('/game_save.json')
     if save_path.exists():
         print('You have a saved progress.')
-        character = create_character()
-    else:
         character = load_game.load_progress()
+    else:
+        character = create_character()
     while not end_of_game(character):
         describe_current_location(board, character)
         direction = get_user_choice(character)
