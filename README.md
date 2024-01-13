@@ -1,9 +1,7 @@
 # Computer Student Simulator 🧑‍💻
 <br>
 
-<img src="https://img.shields.io/badge/Python-4483B5" alt="Python">
-<img src="https://img.shields.io/badge/Game-97C900" alt="Game">
-<img src="https://img.shields.io/badge/Unittest-ADEAD1" alt="unittest">
+<img src="https://img.shields.io/badge/Python-4483B5" alt="Python"> <img src="https://img.shields.io/badge/Game-97C900" alt="Game"> <img src="https://img.shields.io/badge/Unittest-ADEAD1" alt="unittest">
 
 ![img.png](img.png)
 ## About this game🎮
